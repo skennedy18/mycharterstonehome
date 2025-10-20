@@ -1,12 +1,11 @@
 "use client"
 
 import { useState } from "react"
-import Image from "next/image"
 import { Navigation } from "@/components/navigation"
 import { Footer } from "@/components/footer"
 import { Dialog, DialogContent } from "@/components/ui/dialog"
 import { Button } from "@/components/ui/button"
-import { ZoomIn, ChevronLeft, ChevronRight, X } from "lucide-react"
+import { ZoomIn } from "lucide-react"
 
 const galleryImages = [
   {
@@ -52,18 +51,6 @@ export default function GalleryPage() {
 
   const filteredImages = filter === "All" ? galleryImages : galleryImages.filter((img) => img.category === filter)
 
-  const goToPrevious = () => {
-    if (selectedImage !== null) {
-      setSelectedImage(selectedImage === 0 ? filteredImages.length - 1 : selectedImage - 1)
-    }
-  }
-
-  const goToNext = () => {
-    if (selectedImage !== null) {
-      setSelectedImage(selectedImage === filteredImages.length - 1 ? 0 : selectedImage + 1)
-    }
-  }
-
   return (
     <main>
       <Navigation />
@@ -106,12 +93,10 @@ export default function GalleryPage() {
                   className="group relative aspect-[4/3] overflow-hidden rounded-lg cursor-pointer bg-gray-200"
                   onClick={() => setSelectedImage(index)}
                 >
-                  <Image
+                  <img
                     src={image.src || "/placeholder.svg"}
                     alt={image.alt}
-                    fill
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                    className="object-cover transition-transform duration-300 group-hover:scale-110"
+                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
                   />
                   <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-colors duration-300 flex items-center justify-center">
                     <ZoomIn className="h-12 w-12 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -124,51 +109,16 @@ export default function GalleryPage() {
       </div>
       <Footer />
 
+      {/* Lightbox Dialog */}
       <Dialog open={selectedImage !== null} onOpenChange={() => setSelectedImage(null)}>
-        <DialogContent className="max-w-[95vw] w-full h-[95vh] p-0 bg-black/95 border-none">
-          <button
-            onClick={() => setSelectedImage(null)}
-            className="absolute top-4 right-4 z-50 p-2 rounded-full bg-white/10 hover:bg-white/20 transition-colors"
-            aria-label="Close"
-          >
-            <X className="h-6 w-6 text-white" />
-          </button>
-
-          <div className="relative w-full h-full flex items-center justify-center p-4">
+        <DialogContent className="max-w-7xl w-full p-0 bg-black/95">
+          <div className="relative w-full h-[90vh] flex items-center justify-center">
             {selectedImage !== null && (
-              <>
-                <div className="relative w-full h-full">
-                  <Image
-                    src={filteredImages[selectedImage].src || "/placeholder.svg"}
-                    alt={filteredImages[selectedImage].alt}
-                    fill
-                    sizes="95vw"
-                    className="object-contain"
-                  />
-                </div>
-
-                {/* Navigation Arrows */}
-                <button
-                  onClick={goToPrevious}
-                  className="absolute left-4 top-1/2 -translate-y-1/2 p-3 rounded-full bg-white/10 hover:bg-white/20 transition-colors"
-                  aria-label="Previous image"
-                >
-                  <ChevronLeft className="h-8 w-8 text-white" />
-                </button>
-
-                <button
-                  onClick={goToNext}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 p-3 rounded-full bg-white/10 hover:bg-white/20 transition-colors"
-                  aria-label="Next image"
-                >
-                  <ChevronRight className="h-8 w-8 text-white" />
-                </button>
-
-                {/* Image Counter */}
-                <div className="absolute bottom-4 left-1/2 -translate-x-1/2 px-4 py-2 rounded-full bg-white/10 text-white text-sm">
-                  {selectedImage + 1} / {filteredImages.length}
-                </div>
-              </>
+              <img
+                src={filteredImages[selectedImage].src || "/placeholder.svg"}
+                alt={filteredImages[selectedImage].alt}
+                className="max-w-full max-h-full object-contain"
+              />
             )}
           </div>
         </DialogContent>
