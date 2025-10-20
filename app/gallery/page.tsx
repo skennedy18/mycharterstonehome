@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import Image from "next/image"
 import { Navigation } from "@/components/navigation"
 import { Footer } from "@/components/footer"
 import { Dialog, DialogContent } from "@/components/ui/dialog"
@@ -105,10 +106,12 @@ export default function GalleryPage() {
                   className="group relative aspect-[4/3] overflow-hidden rounded-lg cursor-pointer bg-gray-200"
                   onClick={() => setSelectedImage(index)}
                 >
-                  <img
+                  <Image
                     src={image.src || "/placeholder.svg"}
                     alt={image.alt}
-                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                    fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    className="object-cover transition-transform duration-300 group-hover:scale-110"
                   />
                   <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-colors duration-300 flex items-center justify-center">
                     <ZoomIn className="h-12 w-12 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -134,11 +137,15 @@ export default function GalleryPage() {
           <div className="relative w-full h-full flex items-center justify-center p-4">
             {selectedImage !== null && (
               <>
-                <img
-                  src={filteredImages[selectedImage].src || "/placeholder.svg"}
-                  alt={filteredImages[selectedImage].alt}
-                  className="max-w-full max-h-full object-contain"
-                />
+                <div className="relative w-full h-full">
+                  <Image
+                    src={filteredImages[selectedImage].src || "/placeholder.svg"}
+                    alt={filteredImages[selectedImage].alt}
+                    fill
+                    sizes="95vw"
+                    className="object-contain"
+                  />
+                </div>
 
                 {/* Navigation Arrows */}
                 <button
