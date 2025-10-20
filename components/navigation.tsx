@@ -31,11 +31,10 @@ export function Navigation() {
 
   const navLinks = [
     { href: "/", label: "Home" },
+    { href: "/about", label: "About Us" },
     { href: "/models", label: "Our Models" },
     { href: "/available-plots", label: "Available Plots" },
-    { href: "/amenities", label: "Amenities" },
     { href: "/gallery", label: "Gallery" },
-    { href: "/about", label: "About Us" },
     { href: "/contact", label: "Contact" },
   ]
 

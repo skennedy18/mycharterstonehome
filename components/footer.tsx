@@ -80,8 +80,8 @@ export function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/amenities" className="text-sm text-white/80 hover:text-champagne transition-colors">
-                  Amenities
+                <Link href="/available-plots" className="text-sm text-white/80 hover:text-champagne transition-colors">
+                  Available Plots
                 </Link>
               </li>
               <li>

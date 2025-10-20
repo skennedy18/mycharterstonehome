@@ -11,8 +11,9 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } f
 interface Plot {
   id: number
   available: boolean
+  lotNumber: string
+  subdivision: string
   address: string
-  lotSize: string
 }
 
 interface PlotPosition {
@@ -24,36 +25,216 @@ interface PlotPosition {
 
 export function PlotMap() {
   const [plots] = useState<Plot[]>([
-    { id: 1, available: true, address: "3531 Middlewood Circle", lotSize: "0.44 AC" },
-    { id: 2, available: true, address: "3550 Middlewood Circle", lotSize: "0.48 AC" },
-    { id: 3, available: true, address: "3586 Middlewood Circle", lotSize: "0.44 AC" },
-    { id: 4, available: true, address: "3604 Hazelwood Circle", lotSize: "0.52 AC" },
-    { id: 5, available: true, address: "3950 East Landings North", lotSize: "1.50 AC" },
-    { id: 6, available: true, address: "3983 East Landings North", lotSize: "1.56 AC" },
-    { id: 7, available: true, address: "3532 Middlewood Circle", lotSize: "0.44 AC" },
-    { id: 8, available: true, address: "3985 East Landings North", lotSize: "1.49 AC" },
-    { id: 9, available: true, address: "3551 Middlewood Circle", lotSize: "0.48 AC" },
-    { id: 10, available: true, address: "3561 Middlewood Circle", lotSize: "0.48 AC" },
-    { id: 11, available: true, address: "3586 Hazelwood Circle", lotSize: "0.44 AC" },
-    { id: 12, available: true, address: "3580 Hazelwood Circle", lotSize: "0.44 AC" },
-    { id: 13, available: true, address: "3526 Middlewood Circle", lotSize: "0.44 AC" },
-    { id: 14, available: true, address: "3902 East Landings North", lotSize: "1.61 AC" },
-    { id: 15, available: true, address: "3593 Middlewood Circle", lotSize: "0.44 AC" },
-    { id: 16, available: true, address: "3587 Middlewood Circle", lotSize: "0.44 AC" },
-    { id: 17, available: true, address: "3568 Hazelwood Circle", lotSize: "0.49 AC" },
-    { id: 18, available: true, address: "3560 Hazelwood Circle", lotSize: "0.49 AC" },
-    { id: 19, available: true, address: "3519 Hazelwood Circle", lotSize: "0.44 AC" },
-    { id: 20, available: true, address: "3515 Middlewood Circle", lotSize: "0.49 AC" },
-    { id: 21, available: true, address: "3516 Middlewood Circle", lotSize: "0.49 AC" },
-    { id: 22, available: true, address: "3514 Middlewood Circle", lotSize: "0.49 AC" },
-    { id: 23, available: true, address: "3513 Middlewood Circle", lotSize: "0.49 AC" },
-    { id: 24, available: true, address: "3903 East Landings North", lotSize: "1.73 AC" },
-    { id: 25, available: true, address: "3518 Hazelwood Circle", lotSize: "0.44 AC" },
-    { id: 26, available: true, address: "3512 Middlewood Circle", lotSize: "0.49 AC" },
-    { id: 27, available: true, address: "3511 Middlewood Circle", lotSize: "0.49 AC" },
-    { id: 28, available: true, address: "3510 Middlewood Circle", lotSize: "0.58 AC" },
-    { id: 29, available: true, address: "3548 Village Road", lotSize: "0.51 AC" },
-    { id: 30, available: true, address: "3550 Village Road", lotSize: "0.48 AC" },
+    {
+      id: 1,
+      available: true,
+      lotNumber: "3589",
+      subdivision: "15A",
+      address: "2188 Middlewood Circle, Granbury, Texas - 76049",
+    },
+    {
+      id: 2,
+      available: true,
+      lotNumber: "3590",
+      subdivision: "15A",
+      address: "2184 Middlewood Circle, Granbury, Texas - 76049",
+    },
+    {
+      id: 3,
+      available: true,
+      lotNumber: "3591",
+      subdivision: "15A",
+      address: "2180 Middlewood Circle, Granbury, Texas - 76049",
+    },
+    {
+      id: 4,
+      available: true,
+      lotNumber: "3545",
+      subdivision: "15A",
+      address: "2119 Middlewood Circle, Granbury, Texas - 76049",
+    },
+    {
+      id: 5,
+      available: true,
+      lotNumber: "3980",
+      subdivision: "The Landings East",
+      address: "1325 Cirrus Loop, Granbury, Texas - 76049",
+    },
+    {
+      id: 6,
+      available: true,
+      lotNumber: "3983-R",
+      subdivision: "The Landings East",
+      address: "1307 Cirrus Loop, Granbury, Texas - 76049",
+    },
+    {
+      id: 7,
+      available: true,
+      lotNumber: "3539",
+      subdivision: "15A",
+      address: "2145 Middlewood Circle, Granbury, Texas - 76049",
+    },
+    {
+      id: 8,
+      available: true,
+      lotNumber: "3905-R",
+      subdivision: "The Landings East",
+      address: "1418 Cirrus Loop, Granbury, Texas - 76049",
+    },
+    {
+      id: 9,
+      available: true,
+      lotNumber: "3551",
+      subdivision: "15A",
+      address: "2009 Middlewood Circle, Granbury, Texas - 76049",
+    },
+    {
+      id: 10,
+      available: true,
+      lotNumber: "3553",
+      subdivision: "15A",
+      address: "2001 Middlewood Circle, Granbury, Texas - 76049",
+    },
+    {
+      id: 11,
+      available: true,
+      lotNumber: "3585",
+      subdivision: "15A",
+      address: "3109 Hazlewood Road, Granbury, Texas - 76049",
+    },
+    {
+      id: 12,
+      available: true,
+      lotNumber: "3586",
+      subdivision: "15A",
+      address: "3113 Hazlewood Road, Granbury, Texas - 76049",
+    },
+    {
+      id: 13,
+      available: true,
+      lotNumber: "3526",
+      subdivision: "15A",
+      address: "2213 Middlewood Circle, Granbury, Texas - 76049",
+    },
+    {
+      id: 14,
+      available: true,
+      lotNumber: "3921",
+      subdivision: "The Landings East",
+      address: "1407 Cirrus Loop, Granbury, Texas - 76049",
+    },
+    {
+      id: 15,
+      available: true,
+      lotNumber: "3531",
+      subdivision: "15A",
+      address: "2177 Middlewood Circle, Granbury, Texas - 76049",
+    },
+    {
+      id: 16,
+      available: true,
+      lotNumber: "3522",
+      subdivision: "15A",
+      address: "1132 Tremont Lane, Granbury, Texas - 76049",
+    },
+    {
+      id: 17,
+      available: true,
+      lotNumber: "3521",
+      subdivision: "15A",
+      address: "1128 Tremont Lane, Granbury, Texas - 76049",
+    },
+    {
+      id: 18,
+      available: true,
+      lotNumber: "3520",
+      subdivision: "15A",
+      address: "1124 Tremont Lane, Granbury, Texas - 76049",
+    },
+    {
+      id: 19,
+      available: true,
+      lotNumber: "3519",
+      subdivision: "15A",
+      address: "1120 Tremont Lane, Granbury, Texas - 76049",
+    },
+    {
+      id: 20,
+      available: true,
+      lotNumber: "3516",
+      subdivision: "15A",
+      address: "1108 Tremont Lane, Granbury, Texas - 76049",
+    },
+    {
+      id: 21,
+      available: true,
+      lotNumber: "3515",
+      subdivision: "15A",
+      address: "1104 Tremont Lane, Granbury, Texas - 76049",
+    },
+    {
+      id: 22,
+      available: true,
+      lotNumber: "3514",
+      subdivision: "15A",
+      address: "1100 Tremont Lane, Granbury, Texas - 76049",
+    },
+    {
+      id: 23,
+      available: true,
+      lotNumber: "3513",
+      subdivision: "15A",
+      address: "1012 Tremont Lane, Granbury, Texas - 76049",
+    },
+    {
+      id: 24,
+      available: true,
+      lotNumber: "3904",
+      subdivision: "The Landings East",
+      address: "1412 Cirrus Loop, Granbury, Texas - 76049",
+    },
+    {
+      id: 25,
+      available: true,
+      lotNumber: "3518",
+      subdivision: "15A",
+      address: "1116 Tremont Lane, Granbury, Texas - 76049",
+    },
+    {
+      id: 26,
+      available: true,
+      lotNumber: "3512",
+      subdivision: "15A",
+      address: "1008 Tremont Lane, Granbury, Texas - 76049",
+    },
+    {
+      id: 27,
+      available: true,
+      lotNumber: "3511",
+      subdivision: "15A",
+      address: "1004 Tremont Lane, Granbury, Texas - 76049",
+    },
+    {
+      id: 28,
+      available: true,
+      lotNumber: "3510",
+      subdivision: "15A",
+      address: "1000 Tremont Lane, Granbury, Texas - 76049",
+    },
+    {
+      id: 29,
+      available: true,
+      lotNumber: "3548",
+      subdivision: "15A",
+      address: "2109 Middlewood Circle, Granbury, Texas - 76049",
+    },
+    {
+      id: 30,
+      available: true,
+      lotNumber: "3550",
+      subdivision: "15A",
+      address: "2101 Middlewood Circle, Granbury, Texas - 76049",
+    },
   ])
 
   const [selectedPlot, setSelectedPlot] = useState<Plot | null>(null)
@@ -237,22 +418,24 @@ export function PlotMap() {
       <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
         <DialogContent className="sm:max-w-md">
           <DialogHeader>
-            <DialogTitle className="font-serif text-2xl text-navy">Plot #{selectedPlot?.id}</DialogTitle>
-            <DialogDescription className="text-base space-y-2 pt-2">
+            <DialogTitle className="font-serif text-2xl text-navy">Lot #{selectedPlot?.lotNumber}</DialogTitle>
+            <DialogDescription className="text-base space-y-3 pt-2">
               <div className="flex items-start gap-2">
                 <MapPin className="h-5 w-5 text-burgundy mt-0.5 flex-shrink-0" />
                 <div>
                   <p className="font-semibold text-foreground">{selectedPlot?.address}</p>
-                  <p className="text-sm text-muted-foreground">Granbury, TX 76049</p>
                 </div>
               </div>
-              <div className="pt-2">
-                <p className="text-sm text-muted-foreground">
-                  <span className="font-semibold text-foreground">Lot Size:</span> {selectedPlot?.lotSize}
+              <div className="pt-2 space-y-1">
+                <p className="text-sm">
+                  <span className="font-semibold text-foreground">Subdivision:</span>{" "}
+                  <span className="text-muted-foreground">{selectedPlot?.subdivision}</span>
                 </p>
-                <p className="text-sm text-muted-foreground">
+                <p className="text-sm">
                   <span className="font-semibold text-foreground">Section:</span>{" "}
-                  {selectedPlot && plotPositions[selectedPlot.id]?.section}
+                  <span className="text-muted-foreground">
+                    {selectedPlot && plotPositions[selectedPlot.id]?.section}
+                  </span>
                 </p>
               </div>
               <div className="pt-2">
