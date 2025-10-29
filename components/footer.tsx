@@ -76,12 +76,12 @@ export function Footer() {
             <ul className="space-y-2">
               <li>
                 <Link href="/models" className="text-sm text-white/80 hover:text-champagne transition-colors">
-                  Our Models
+                  Floor Plans
                 </Link>
               </li>
               <li>
                 <Link href="/available-plots" className="text-sm text-white/80 hover:text-champagne transition-colors">
-                  Available Plots
+                  Available Homesites
                 </Link>
               </li>
               <li>

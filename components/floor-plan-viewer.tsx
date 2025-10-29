@@ -1,11 +1,15 @@
 "use client"
 
-import { useState, useRef, type MouseEvent } from "react"
+import type React from "react"
+
+import { useState, useRef, useEffect, type MouseEvent } from "react"
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 import { Button } from "@/components/ui/button"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Badge } from "@/components/ui/badge"
-import { ZoomIn, ZoomOut, Download, Maximize2 } from "lucide-react"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+import { ZoomIn, ZoomOut, Download, Maximize2, Send } from "lucide-react"
 import Image from "next/image"
 
 interface FloorPlan {
@@ -29,6 +33,25 @@ export function FloorPlanViewer({ modelName, floorPlans, elevations, open, onOpe
   const [position, setPosition] = useState({ x: 0, y: 0 })
   const [dragStart, setDragStart] = useState({ x: 0, y: 0 })
   const containerRef = useRef<HTMLDivElement>(null)
+
+  const [showRequestForm, setShowRequestForm] = useState(false)
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+  })
+  const [isSubmitted, setIsSubmitted] = useState(false)
+
+  useEffect(() => {
+    if (!open) {
+      setShowRequestForm(false)
+      setFormData({ firstName: "", lastName: "", email: "", phone: "" })
+      setIsSubmitted(false)
+      setZoom(100)
+      setPosition({ x: 0, y: 0 })
+    }
+  }, [open])
 
   const handleZoomIn = () => setZoom((prev) => Math.min(prev + 25, 200))
   const handleZoomOut = () => setZoom((prev) => Math.max(prev - 25, 50))
@@ -64,23 +87,60 @@ export function FloorPlanViewer({ modelName, floorPlans, elevations, open, onOpe
     setIsDragging(false)
   }
 
+  const handleRequestSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+
+    const subject = encodeURIComponent(`Floor Plan Request - ${modelName}`)
+    const body = encodeURIComponent(`
+New Floor Plan Information Request
+
+Model: ${modelName}
+First Name: ${formData.firstName}
+Last Name: ${formData.lastName}
+Email: ${formData.email}
+Phone: ${formData.phone}
+
+This request was submitted from the Floor Plans page.
+    `)
+
+    window.location.href = `mailto:team@newrootseb5.com?subject=${subject}&body=${body}`
+
+    // Show success state and reset form
+    setIsSubmitted(true)
+    setTimeout(() => {
+      setIsSubmitted(false)
+      setShowRequestForm(false)
+      setFormData({ firstName: "", lastName: "", email: "", phone: "" })
+    }, 2000)
+  }
+
+  const handleDownload = () => {
+    // Create a link element and trigger download
+    const link = document.createElement("a")
+    link.href = floorPlans[0]?.image || ""
+    link.download = `${modelName}-floor-plan.png`
+    document.body.appendChild(link)
+    link.click()
+    document.body.removeChild(link)
+  }
+
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-7xl h-[90vh] p-0">
-        <DialogHeader className="p-6 pb-0">
+      <DialogContent className="max-w-7xl h-[90vh] p-0 flex flex-col">
+        <DialogHeader className="p-6 pb-4 shrink-0">
           <DialogTitle className="font-serif text-2xl text-navy">{modelName} - Floor Plans & Elevations</DialogTitle>
         </DialogHeader>
 
-        <div className="flex-1 overflow-hidden flex flex-col">
-          <Tabs value={activeTab} onValueChange={setActiveTab} className="flex-1 flex flex-col">
-            <div className="px-6 border-b">
+        <div className="flex-1 overflow-hidden flex flex-col min-h-0">
+          <Tabs value={activeTab} onValueChange={setActiveTab} className="flex-1 flex flex-col min-h-0">
+            <div className="px-6 border-b shrink-0">
               <TabsList className="grid w-full max-w-md grid-cols-2">
                 <TabsTrigger value="floor-plans">Floor Plans</TabsTrigger>
                 <TabsTrigger value="elevations">Elevations</TabsTrigger>
               </TabsList>
             </div>
 
-            <div className="flex-1 overflow-auto p-6">
+            <div className="flex-1 overflow-y-auto p-6 min-h-0 scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-100">
               <TabsContent value="floor-plans" className="mt-0 space-y-6">
                 {floorPlans.map((plan, index) => (
                   <div key={index} className="space-y-2">
@@ -102,7 +162,7 @@ export function FloorPlanViewer({ modelName, floorPlans, elevations, open, onOpe
                       <div
                         className="overflow-hidden"
                         style={{
-                          maxHeight: "600px",
+                          maxHeight: "400px",
                         }}
                       >
                         <Image
@@ -142,7 +202,7 @@ export function FloorPlanViewer({ modelName, floorPlans, elevations, open, onOpe
                       <div
                         className="overflow-hidden"
                         style={{
-                          maxHeight: "600px",
+                          maxHeight: "400px",
                         }}
                       >
                         <Image
@@ -166,26 +226,124 @@ export function FloorPlanViewer({ modelName, floorPlans, elevations, open, onOpe
             </div>
           </Tabs>
 
-          <div className="border-t p-4 bg-gray-50">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <Button variant="outline" size="sm" onClick={handleZoomOut} disabled={zoom <= 50}>
-                  <ZoomOut className="h-4 w-4" />
-                </Button>
-                <span className="text-sm font-medium min-w-[60px] text-center">{zoom}%</span>
-                <Button variant="outline" size="sm" onClick={handleZoomIn} disabled={zoom >= 200}>
-                  <ZoomIn className="h-4 w-4" />
-                </Button>
-                <Button variant="outline" size="sm" onClick={handleReset}>
-                  <Maximize2 className="h-4 w-4 mr-2" />
-                  Reset
-                </Button>
+          <div className={`border-t bg-gray-50 shrink-0 ${showRequestForm ? "h-[350px]" : ""}`}>
+            {showRequestForm && (
+              <div className="h-full overflow-y-auto p-6 scrollbar-thin scrollbar-thumb-burgundy scrollbar-track-gray-200">
+                <form onSubmit={handleRequestSubmit} className="space-y-4">
+                  <h3 className="font-semibold text-lg text-navy">Request More Info</h3>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div className="space-y-2">
+                      <Label htmlFor="firstName">First Name</Label>
+                      <Input
+                        id="firstName"
+                        value={formData.firstName}
+                        onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
+                        required
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="lastName">Last Name</Label>
+                      <Input
+                        id="lastName"
+                        value={formData.lastName}
+                        onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
+                        required
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="email">Email</Label>
+                      <Input
+                        id="email"
+                        type="email"
+                        value={formData.email}
+                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                        required
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="phone">Phone Number</Label>
+                      <Input
+                        id="phone"
+                        type="tel"
+                        value={formData.phone}
+                        onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                        required
+                      />
+                    </div>
+                  </div>
+                  <div className="flex gap-3 justify-end pt-2">
+                    <Button
+                      type="button"
+                      variant="outline"
+                      size="sm"
+                      onClick={() => setShowRequestForm(false)}
+                      className="h-9"
+                    >
+                      Cancel
+                    </Button>
+                    <Button type="submit" size="sm" className="bg-burgundy hover:bg-burgundy/90 text-white h-9">
+                      {isSubmitted ? "Submitted!" : "Submit Request"}
+                    </Button>
+                  </div>
+                </form>
               </div>
-              <Button className="bg-burgundy hover:bg-burgundy/90 text-white">
-                <Download className="h-4 w-4 mr-2" />
-                Download All Plans
-              </Button>
-            </div>
+            )}
+
+            {!showRequestForm && (
+              <div className="p-4">
+                <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-3">
+                  <div className="flex items-center gap-2 flex-wrap">
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={handleZoomOut}
+                      disabled={zoom <= 50}
+                      className="h-8 px-2 bg-transparent"
+                    >
+                      <ZoomOut className="h-3 w-3" />
+                    </Button>
+                    <span className="text-xs font-medium min-w-[50px] text-center">{zoom}%</span>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={handleZoomIn}
+                      disabled={zoom >= 200}
+                      className="h-8 px-2"
+                    >
+                      <ZoomIn className="h-3 w-3" />
+                    </Button>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={handleReset}
+                      className="h-8 px-3 text-xs bg-transparent"
+                    >
+                      <Maximize2 className="h-3 w-3 mr-1" />
+                      Reset
+                    </Button>
+                  </div>
+                  <div className="flex flex-col sm:flex-row gap-2 w-full lg:w-auto">
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => setShowRequestForm(true)}
+                      className="border-burgundy text-burgundy hover:bg-burgundy hover:text-white w-full sm:w-auto h-8 px-3 text-xs"
+                    >
+                      <Send className="h-3 w-3 mr-1" />
+                      Request More Info
+                    </Button>
+                    <Button
+                      size="sm"
+                      onClick={handleDownload}
+                      className="bg-burgundy hover:bg-burgundy/90 text-white w-full sm:w-auto h-8 px-3 text-xs"
+                    >
+                      <Download className="h-3 w-3 mr-1" />
+                      Download Plans
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </DialogContent>

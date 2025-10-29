@@ -32,8 +32,8 @@ export function Navigation() {
   const navLinks = [
     { href: "/", label: "Home" },
     { href: "/about", label: "About Us" },
-    { href: "/models", label: "Our Models" },
-    { href: "/available-plots", label: "Available Plots" },
+    { href: "/models", label: "Floor Plans" },
+    { href: "/available-plots", label: "Available Homesites" },
     { href: "/gallery", label: "Gallery" },
     { href: "/contact", label: "Contact" },
   ]

@@ -1,9 +1,13 @@
 "use client"
 
+import type React from "react"
+
 import { useState } from "react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
 import { MapPin } from "lucide-react"
 import Image from "next/image"
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog"
@@ -27,21 +31,21 @@ export function PlotMap() {
   const [plots] = useState<Plot[]>([
     {
       id: 1,
-      available: true,
+      available: false,
       lotNumber: "3589",
       subdivision: "15A",
       address: "2188 Middlewood Circle, Granbury, Texas - 76049",
     },
     {
       id: 2,
-      available: true,
+      available: false,
       lotNumber: "3590",
       subdivision: "15A",
       address: "2184 Middlewood Circle, Granbury, Texas - 76049",
     },
     {
       id: 3,
-      available: true,
+      available: false,
       lotNumber: "3591",
       subdivision: "15A",
       address: "2180 Middlewood Circle, Granbury, Texas - 76049",
@@ -239,6 +243,13 @@ export function PlotMap() {
 
   const [selectedPlot, setSelectedPlot] = useState<Plot | null>(null)
   const [isDialogOpen, setIsDialogOpen] = useState(false)
+  const [showQuestionForm, setShowQuestionForm] = useState(false)
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+  })
 
   const plotPositions: Record<number, PlotPosition> = {
     1: { x: "66.8%", y: "37.0%", section: "Orchard 15A-15B", mapImage: 1 },
@@ -278,7 +289,35 @@ export function PlotMap() {
     if (plot) {
       setSelectedPlot(plot)
       setIsDialogOpen(true)
+      setShowQuestionForm(false)
+      setFormData({ firstName: "", lastName: "", email: "", phone: "" })
     }
+  }
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+
+    const subject = encodeURIComponent(`Homesite Question - Lot #${selectedPlot?.lotNumber}`)
+    const body = encodeURIComponent(`
+New Homesite Question
+
+Lot Number: ${selectedPlot?.lotNumber}
+Address: ${selectedPlot?.address}
+Subdivision: ${selectedPlot?.subdivision}
+
+Contact Information:
+First Name: ${formData.firstName}
+Last Name: ${formData.lastName}
+Email: ${formData.email}
+Phone: ${formData.phone}
+
+This question was submitted from the Available Homesites page.
+    `)
+
+    window.location.href = `mailto:team@newrootseb5.com?subject=${subject}&body=${body}`
+
+    setIsDialogOpen(false)
+    setFormData({ firstName: "", lastName: "", email: "", phone: "" })
   }
 
   const availableCount = plots.filter((p) => p.available).length
@@ -293,12 +332,18 @@ export function PlotMap() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="font-serif text-3xl font-bold text-navy mb-2">Available Plots</h2>
-          <p className="text-muted-foreground">{availableCount} of 30 plots available</p>
+          <h2 className="font-serif text-3xl font-bold text-navy mb-2">Available Homesites</h2>
+          <p className="text-muted-foreground">{availableCount} of 30 homesites available</p>
         </div>
-        <div className="flex items-center gap-2">
-          <div className="w-4 h-4 bg-green-500 rounded-full" />
-          <span className="text-sm">Available</span>
+        <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2">
+            <div className="w-4 h-4 bg-green-500 rounded-full" />
+            <span className="text-sm">Available</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <div className="w-4 h-4 bg-red-500 rounded-full" />
+            <span className="text-sm">Sold</span>
+          </div>
         </div>
       </div>
 
@@ -330,7 +375,9 @@ export function PlotMap() {
                     style={{ left: pos.x, top: pos.y }}
                     title={`Plot ${plotId} - ${plot.address}`}
                   >
-                    <div className="w-11 h-11 rounded-full flex items-center justify-center font-bold text-white text-sm shadow-lg border-2 border-white bg-green-500 hover:bg-green-600">
+                    <div
+                      className={`w-11 h-11 rounded-full flex items-center justify-center font-bold text-white text-sm shadow-lg border-2 border-white ${plot.available ? "bg-green-500 hover:bg-green-600" : "bg-red-500 hover:bg-red-600"}`}
+                    >
                       {plotId}
                     </div>
                   </button>
@@ -367,7 +414,9 @@ export function PlotMap() {
                     style={{ left: pos.x, top: pos.y }}
                     title={`Plot ${plotId} - ${plot.address}`}
                   >
-                    <div className="w-11 h-11 rounded-full flex items-center justify-center font-bold text-white text-sm shadow-lg border-2 border-white bg-green-500 hover:bg-green-600">
+                    <div
+                      className={`w-11 h-11 rounded-full flex items-center justify-center font-bold text-white text-sm shadow-lg border-2 border-white ${plot.available ? "bg-green-500 hover:bg-green-600" : "bg-red-500 hover:bg-red-600"}`}
+                    >
                       {plotId}
                     </div>
                   </button>
@@ -404,7 +453,9 @@ export function PlotMap() {
                     style={{ left: pos.x, top: pos.y }}
                     title={`Plot ${plotId} - ${plot.address}`}
                   >
-                    <div className="w-11 h-11 rounded-full flex items-center justify-center font-bold text-white text-sm shadow-lg border-2 border-white bg-green-500 hover:bg-green-600">
+                    <div
+                      className={`w-11 h-11 rounded-full flex items-center justify-center font-bold text-white text-sm shadow-lg border-2 border-white ${plot.available ? "bg-green-500 hover:bg-green-600" : "bg-red-500 hover:bg-red-600"}`}
+                    >
                       {plotId}
                     </div>
                   </button>
@@ -439,18 +490,78 @@ export function PlotMap() {
                 </p>
               </div>
               <div className="pt-2">
-                <Badge className="bg-green-500 text-white">Available</Badge>
+                <Badge className={selectedPlot?.available ? "bg-green-500 text-white" : "bg-red-500 text-white"}>
+                  {selectedPlot?.available ? "Available" : "Sold"}
+                </Badge>
               </div>
             </DialogDescription>
           </DialogHeader>
-          <div className="flex gap-2 pt-4">
-            <Button className="flex-1 bg-burgundy hover:bg-burgundy/90" asChild>
-              <a href="tel:+18477575571">Call Us</a>
-            </Button>
-            <Button className="flex-1 bg-transparent" variant="outline" asChild>
-              <a href="/contact">Contact Us</a>
-            </Button>
-          </div>
+          {!showQuestionForm ? (
+            <div className="flex gap-2 pt-4">
+              <Button className="flex-1 bg-burgundy hover:bg-burgundy/90" asChild>
+                <a href="tel:+18477575571">Call Us</a>
+              </Button>
+              <Button className="flex-1 bg-transparent" variant="outline" onClick={() => setShowQuestionForm(true)}>
+                Ask A Question
+              </Button>
+            </div>
+          ) : (
+            <form onSubmit={handleSubmit} className="space-y-4 pt-4">
+              <div className="grid grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <Label htmlFor="firstName">First Name *</Label>
+                  <Input
+                    id="firstName"
+                    value={formData.firstName}
+                    onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
+                    required
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="lastName">Last Name *</Label>
+                  <Input
+                    id="lastName"
+                    value={formData.lastName}
+                    onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
+                    required
+                  />
+                </div>
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="email">Email *</Label>
+                <Input
+                  id="email"
+                  type="email"
+                  value={formData.email}
+                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                  required
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="phone">Phone Number *</Label>
+                <Input
+                  id="phone"
+                  type="tel"
+                  value={formData.phone}
+                  onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                  required
+                />
+              </div>
+              <div className="flex gap-2">
+                <Button type="submit" className="flex-1 bg-burgundy hover:bg-burgundy/90">
+                  Submit Question
+                </Button>
+                <Button
+                  type="button"
+                  variant="outline"
+                  className="flex-1 bg-transparent"
+                  onClick={() => setShowQuestionForm(false)}
+                >
+                  Back
+                </Button>
+              </div>
+            </form>
+          )}
         </DialogContent>
       </Dialog>
     </div>

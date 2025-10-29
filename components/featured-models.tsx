@@ -4,6 +4,7 @@ import { Card, CardContent, CardFooter } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Bed, Bath, Maximize, Car } from "lucide-react"
+import Link from "next/link"
 
 interface Model {
   name: string
@@ -111,7 +112,9 @@ export function FeaturedModels() {
                 </div>
               </CardContent>
               <CardFooter className="p-6 pt-0">
-                <Button className="w-full bg-burgundy hover:bg-burgundy/90 text-white">View Details</Button>
+                <Button asChild className="w-full bg-burgundy hover:bg-burgundy/90 text-white">
+                  <Link href="/models">View Details</Link>
+                </Button>
               </CardFooter>
             </Card>
           ))}
@@ -119,11 +122,12 @@ export function FeaturedModels() {
 
         <div className="text-center mt-12">
           <Button
+            asChild
             size="lg"
             variant="outline"
             className="border-burgundy text-burgundy hover:bg-burgundy hover:text-white bg-transparent"
           >
-            View All Models
+            <Link href="/models">View All Floor Plans</Link>
           </Button>
         </div>
       </div>

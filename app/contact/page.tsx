@@ -11,7 +11,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { MapPin, Phone, Mail, Clock } from "lucide-react"
+import { MapPin, Phone, Clock } from "lucide-react"
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -105,18 +105,6 @@ export default function ContactPage() {
                           <p className="font-medium text-navy">Call Us</p>
                           <a href="tel:+18477575571" className="text-sm text-muted-foreground hover:text-burgundy">
                             (847) 757-5571
-                          </a>
-                        </div>
-                      </div>
-                      <div className="flex items-start gap-3">
-                        <Mail className="h-5 w-5 text-burgundy flex-shrink-0 mt-1" />
-                        <div>
-                          <p className="font-medium text-navy">Email Us</p>
-                          <a
-                            href="mailto:team@newrootseb5.com"
-                            className="text-sm text-muted-foreground hover:text-burgundy"
-                          >
-                            team@newrootseb5.com
                           </a>
                         </div>
                       </div>
