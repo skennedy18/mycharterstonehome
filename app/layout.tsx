@@ -74,6 +74,9 @@ export default function RootLayout({
 					href='https://fonts.gstatic.com'
 					crossOrigin='anonymous'
 				/>
+				<script
+					defer
+					src='https://storage.smarttouchinteractive.com/source/forms/smarttouch.js'></script>
 			</head>
 			<body className={`font-sans ${GeistSans.variable} ${GeistMono.variable} antialiased`}>
 				<GoogleTagManager gtmId='GTM-PHKX86ZB' />
