@@ -371,7 +371,11 @@ This question was submitted from the Available Homesites page.
 										onClick={() => handlePlotClick(plotId)}
 										className='absolute transform -translate-x-1/2 -translate-y-1/2 transition-all z-10 cursor-pointer hover:scale-110'
 										style={{ left: pos.x, top: pos.y }}
-										title={`Plot ${plotId} - ${plot.address}`}>
+										title={`Plot ${plotId} - ${plot.address}`}
+										data-sttrack='View Available Homesite'
+										data-stspec={`${plot.address}`}
+										data-stlabel={`Homesite ${plotId}`}
+										data-stcommunity={`Pecan Plantation - Orchard`}>
 										<div className={`w-11 h-11 rounded-full flex items-center justify-center font-bold text-white text-sm shadow-lg border-2 border-white ${plot.available ? 'bg-green-500 hover:bg-green-600' : 'bg-red-500 hover:bg-red-600'}`}>{plotId}</div>
 									</button>
 								);
@@ -405,7 +409,11 @@ This question was submitted from the Available Homesites page.
 										onClick={() => handlePlotClick(plotId)}
 										className='absolute transform -translate-x-1/2 -translate-y-1/2 transition-all z-10 cursor-pointer hover:scale-110'
 										style={{ left: pos.x, top: pos.y }}
-										title={`Plot ${plotId} - ${plot.address}`}>
+										title={`Plot ${plotId} - ${plot.address}`}
+										data-sttrack='View Available Homesite'
+										data-stspec={`${plot.address}`}
+										data-stlabel={`Homesite ${plotId}`}
+										data-stcommunity={`Pecan Plantation - Orchard`}>
 										<div className={`w-11 h-11 rounded-full flex items-center justify-center font-bold text-white text-sm shadow-lg border-2 border-white ${plot.available ? 'bg-green-500 hover:bg-green-600' : 'bg-red-500 hover:bg-red-600'}`}>{plotId}</div>
 									</button>
 								);
@@ -439,7 +447,11 @@ This question was submitted from the Available Homesites page.
 										onClick={() => handlePlotClick(plotId)}
 										className='absolute transform -translate-x-1/2 -translate-y-1/2 transition-all z-10 cursor-pointer hover:scale-110'
 										style={{ left: pos.x, top: pos.y }}
-										title={`Plot ${plotId} - ${plot.address}`}>
+										title={`Plot ${plotId} - ${plot.address}`}
+										data-sttrack='View Available Homesite'
+										data-stspec={`${plot.address}`}
+										data-stlabel={`Homesite ${plotId}`}
+										data-stcommunity={`Pecan Plantation - East Landings`}>
 										<div className={`w-11 h-11 rounded-full flex items-center justify-center font-bold text-white text-sm shadow-lg border-2 border-white ${plot.available ? 'bg-green-500 hover:bg-green-600' : 'bg-red-500 hover:bg-red-600'}`}>{plotId}</div>
 									</button>
 								);
@@ -479,8 +491,15 @@ This question was submitted from the Available Homesites page.
 						<div className='flex gap-2 pt-4'>
 							<Button
 								className='flex-1 bg-burgundy hover:bg-burgundy/90'
+								data-stlabel='Call Us - (847) 757-5571'
+								data-stspec={`${selectedPlot?.address}`}
+								data-stcommunity={`Pecan Plantation - ${selectedPlot && plotPositions[selectedPlot.id]?.section === 'East Landings' ? 'East Landings' : 'Orchard'}`}
 								asChild>
-								<a href='tel:+18477575571'>Call Us</a>
+								<a
+									href='tel:+18477575571'
+									data-stlabel='Call Us - (847) 757-5571'>
+									Call Us
+								</a>
 							</Button>
 							<Button
 								className='flex-1 bg-transparent'
@@ -501,8 +520,9 @@ This question was submitted from the Available Homesites page.
 									field10935={selectedPlot?.address || ''}
 									field10936={selectedPlot?.subdivision || ''}
 									field10937={(selectedPlot && plotPositions[selectedPlot.id]?.section) || ''}
+									community={`Pecan Plantation - ${selectedPlot && plotPositions[selectedPlot.id]?.section === 'East Landings' ? 'East Landings' : 'Orchard'}`}
 									spec={selectedPlot?.address || ''}
-									label={`${selectedPlot?.subdivision ? 'Subdivision: ' + selectedPlot?.subdivision : ''}, Section: ${selectedPlot && plotPositions[selectedPlot.id]?.section ? plotPositions[selectedPlot.id]?.section : ''}`}
+									label='Ask A Question'
 									submit='Submit Request'></smarttouch-nexgen>
 							</div>
 							<Button

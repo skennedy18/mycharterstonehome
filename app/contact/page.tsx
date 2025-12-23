@@ -92,6 +92,7 @@ export default function ContactPage() {
 													<p className='font-medium text-navy'>Call Us</p>
 													<a
 														href='tel:+18477575571'
+														data-stlabel='Call Us - (847) 757-5571'
 														className='text-sm text-muted-foreground hover:text-burgundy'>
 														(847) 757-5571
 													</a>

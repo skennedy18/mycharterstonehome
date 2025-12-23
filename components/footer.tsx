@@ -41,7 +41,9 @@ export function Footer() {
 								target='_blank'
 								rel='noopener noreferrer'
 								className='hover:text-champagne transition-colors'
-								aria-label='Facebook'>
+								aria-label='Facebook'
+								data-sttrack='Click Through'
+								data-stlabel='Facebook Icon'>
 								<Facebook className='h-5 w-5' />
 							</a>
 							<a
@@ -49,7 +51,9 @@ export function Footer() {
 								target='_blank'
 								rel='noopener noreferrer'
 								className='hover:text-champagne transition-colors'
-								aria-label='Instagram'>
+								aria-label='Instagram'
+								data-sttrack='Click Through'
+								data-stlabel='Instagram Icon'>
 								<Instagram className='h-5 w-5' />
 							</a>
 							<a
@@ -57,7 +61,9 @@ export function Footer() {
 								target='_blank'
 								rel='noopener noreferrer'
 								className='hover:text-champagne transition-colors'
-								aria-label='LinkedIn'>
+								aria-label='LinkedIn'
+								data-sttrack='Click Through'
+								data-stlabel='LinkedIn Icon'>
 								<Linkedin className='h-5 w-5' />
 							</a>
 						</div>
@@ -121,6 +127,7 @@ export function Footer() {
 								<Phone className='h-5 w-5 flex-shrink-0' />
 								<a
 									href='tel:+18477575571'
+									data-stlabel='Footer - (847) 757-5571'
 									className='hover:text-champagne transition-colors'>
 									(847) 757-5571
 								</a>
@@ -129,7 +136,8 @@ export function Footer() {
 								<Mail className='h-5 w-5 flex-shrink-0' />
 								<a
 									href='mailto:info@charterstonehomes.com'
-									className='hover:text-champagne transition-colors'>
+									className='hover:text-champagne transition-colors'
+									data-stlabel='Footer - info@charterstonehomes.com'>
 									info@charterstonehomes.com
 								</a>
 							</li>
@@ -148,6 +156,7 @@ export function Footer() {
 							spanmobile12='1,2'
 							submit='Subscribe'
 							placeholders
+							label='Footer - Stay Updated'
 							smarttouch-nexgen></smarttouch-nexgen>
 					</div>
 				</div>
