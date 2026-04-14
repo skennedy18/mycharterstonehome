@@ -6,22 +6,10 @@ import { Card, CardContent } from "@/components/ui/card"
 
 const team = [
   {
-    name: "Brian Carlin",
-    role: "Operator / Builder",
-    image: "/team/brian-carlin.png",
-    bio: "The son of a builder/developer, he started working for his father's company after graduating from the University of Texas at Austin in 1999. Brian stays actively engaged in building education, learning from the leading engineers and professionals in the field. He has a passion for working with people helping them bring their vision to life. However, building is his second love, his first: his wife and daughters.",
-  },
-  {
     name: "Ted Broden",
-    role: "Construction Manager",
+    role: "Builder",
     image: "/team/ted-broden.png",
     bio: "With nearly 25 years of experience in real estate development and construction management, Ted has a proven track record of managing and executing technically complex, high-profile projects. His notable developments include 8899 Beverly and The Rosewood Houses, both exemplifying a commitment to quality, innovation, and sustainability. Ted brings expertise in luxury residential development and LEED-certified design to every project.",
-  },
-  {
-    name: "Celeste McFarland",
-    role: "Operations Manager",
-    image: "/team/celeste-mcfarland.png",
-    bio: "Celeste is the Operations Manager overseeing daily operations across our territory. With a focus on optimizing efficiency and driving process improvements, Celeste ensures that every project runs smoothly and meets our high standards. In her free time she loves spending quality time with her husband and two children while exploring the DFW area.",
   },
 ]
 
