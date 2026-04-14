@@ -163,12 +163,89 @@ export default function ContactPage() {
 												<p className='text-muted-foreground'>We've received your message and will get back to you shortly.</p>
 											</div>
 										) : (
-											<smarttouch-nexgen
-												form='4020'
-												client='2339'
-												span6='1,2,4,7,10898'
-												submit='Send Message'
-												spanmobile12='1,2,4,7,10898'></smarttouch-nexgen>
+											<form onSubmit={handleSubmit} className='space-y-6'>
+												<div className='grid md:grid-cols-2 gap-4'>
+													<div>
+														<label htmlFor='firstName' className='block text-sm font-medium text-navy mb-1'>First Name *</label>
+														<input
+															type='text'
+															id='firstName'
+															name='firstName'
+															required
+															value={formData.firstName}
+															onChange={handleChange}
+															className='w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-burgundy focus:border-transparent'
+														/>
+													</div>
+													<div>
+														<label htmlFor='lastName' className='block text-sm font-medium text-navy mb-1'>Last Name *</label>
+														<input
+															type='text'
+															id='lastName'
+															name='lastName'
+															required
+															value={formData.lastName}
+															onChange={handleChange}
+															className='w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-burgundy focus:border-transparent'
+														/>
+													</div>
+												</div>
+												<div className='grid md:grid-cols-2 gap-4'>
+													<div>
+														<label htmlFor='email' className='block text-sm font-medium text-navy mb-1'>Email *</label>
+														<input
+															type='email'
+															id='email'
+															name='email'
+															required
+															value={formData.email}
+															onChange={handleChange}
+															className='w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-burgundy focus:border-transparent'
+														/>
+													</div>
+													<div>
+														<label htmlFor='phone' className='block text-sm font-medium text-navy mb-1'>Phone</label>
+														<input
+															type='tel'
+															id='phone'
+															name='phone'
+															value={formData.phone}
+															onChange={handleChange}
+															className='w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-burgundy focus:border-transparent'
+														/>
+													</div>
+												</div>
+												<div>
+													<label htmlFor='interest' className='block text-sm font-medium text-navy mb-1'>I&apos;m Interested In</label>
+													<input
+														type='text'
+														id='interest'
+														name='interest'
+														placeholder='e.g., Building a custom home, Available plots...'
+														value={formData.interest}
+														onChange={handleChange}
+														className='w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-burgundy focus:border-transparent'
+													/>
+												</div>
+												<div>
+													<label htmlFor='message' className='block text-sm font-medium text-navy mb-1'>Message *</label>
+													<textarea
+														id='message'
+														name='message'
+														required
+														rows={5}
+														value={formData.message}
+														onChange={handleChange}
+														className='w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-burgundy focus:border-transparent resize-none'
+													/>
+												</div>
+												<button
+													type='submit'
+													className='w-full bg-burgundy hover:bg-burgundy/90 text-white font-medium py-3 px-6 rounded-md transition-colors'
+												>
+													Send Message
+												</button>
+											</form>
 										)}
 									</CardContent>
 								</Card>
