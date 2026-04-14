@@ -19,18 +19,26 @@ export default function ContactPage() {
 	});
 	const [isSubmitted, setIsSubmitted] = useState(false);
 
-	const handleSubmit = (e: React.FormEvent) => {
+	const [isSubmitting, setIsSubmitting] = useState(false);
+	const [error, setError] = useState('');
+
+	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
+		setIsSubmitting(true);
+		setError('');
 
-		// Create mailto link with form data
-		const subject = encodeURIComponent(`Contact Form: ${formData.interest || 'General Inquiry'}`);
-		const body = encodeURIComponent(`Name: ${formData.firstName} ${formData.lastName}\n` + `Email: ${formData.email}\n` + `Phone: ${formData.phone}\n` + `Interest: ${formData.interest}\n\n` + `Message:\n${formData.message}`);
+		try {
+			const response = await fetch('/api/contact', {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify(formData),
+			});
 
-		window.location.href = `mailto:team@newrootseb5.com?subject=${subject}&body=${body}`;
+			if (!response.ok) {
+				throw new Error('Failed to send message');
+			}
 
-		setIsSubmitted(true);
-		setTimeout(() => {
-			setIsSubmitted(false);
+			setIsSubmitted(true);
 			setFormData({
 				firstName: '',
 				lastName: '',
@@ -39,7 +47,11 @@ export default function ContactPage() {
 				interest: '',
 				message: ''
 			});
-		}, 3000);
+		} catch {
+			setError('Failed to send message. Please try again or call us directly.');
+		} finally {
+			setIsSubmitting(false);
+		}
 	};
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -239,11 +251,17 @@ export default function ContactPage() {
 														className='w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-burgundy focus:border-transparent resize-none'
 													/>
 												</div>
+												{error && (
+													<div className='p-3 bg-red-50 border border-red-200 rounded-md text-red-700 text-sm'>
+														{error}
+													</div>
+												)}
 												<button
 													type='submit'
-													className='w-full bg-burgundy hover:bg-burgundy/90 text-white font-medium py-3 px-6 rounded-md transition-colors'
+													disabled={isSubmitting}
+													className='w-full bg-burgundy hover:bg-burgundy/90 text-white font-medium py-3 px-6 rounded-md transition-colors disabled:opacity-50 disabled:cursor-not-allowed'
 												>
-													Send Message
+													{isSubmitting ? 'Sending...' : 'Send Message'}
 												</button>
 											</form>
 										)}
