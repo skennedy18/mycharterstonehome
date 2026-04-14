@@ -17,7 +17,7 @@ export async function POST(request: Request) {
 
     const { data, error } = await resend.emails.send({
       from: 'Charterstone Contact <onboarding@resend.dev>',
-      to: ['team@newrootseb5.com'],
+      to: ['mathew@newrootseb5.com'],
       replyTo: email,
       subject: `New Contact Form Submission from ${firstName} ${lastName}`,
       html: `
@@ -32,13 +32,11 @@ export async function POST(request: Request) {
     })
 
     if (error) {
-      console.error('Resend error:', error)
       return NextResponse.json({ error: 'Failed to send email' }, { status: 500 })
     }
 
     return NextResponse.json({ success: true, data })
-  } catch (error) {
-    console.error('Contact form error:', error)
+  } catch {
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
   }
 }
