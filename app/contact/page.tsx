@@ -19,18 +19,26 @@ export default function ContactPage() {
 	});
 	const [isSubmitted, setIsSubmitted] = useState(false);
 
-	const handleSubmit = (e: React.FormEvent) => {
+	const [isSubmitting, setIsSubmitting] = useState(false);
+	const [error, setError] = useState('');
+
+	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
+		setIsSubmitting(true);
+		setError('');
 
-		// Create mailto link with form data
-		const subject = encodeURIComponent(`Contact Form: ${formData.interest || 'General Inquiry'}`);
-		const body = encodeURIComponent(`Name: ${formData.firstName} ${formData.lastName}\n` + `Email: ${formData.email}\n` + `Phone: ${formData.phone}\n` + `Interest: ${formData.interest}\n\n` + `Message:\n${formData.message}`);
+		try {
+			const response = await fetch('/api/contact', {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify(formData),
+			});
 
-		window.location.href = `mailto:team@newrootseb5.com?subject=${subject}&body=${body}`;
+			if (!response.ok) {
+				throw new Error('Failed to send message');
+			}
 
-		setIsSubmitted(true);
-		setTimeout(() => {
-			setIsSubmitted(false);
+			setIsSubmitted(true);
 			setFormData({
 				firstName: '',
 				lastName: '',
@@ -39,7 +47,11 @@ export default function ContactPage() {
 				interest: '',
 				message: ''
 			});
-		}, 3000);
+		} catch {
+			setError('Failed to send message. Please try again or call us directly.');
+		} finally {
+			setIsSubmitting(false);
+		}
 	};
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -163,12 +175,95 @@ export default function ContactPage() {
 												<p className='text-muted-foreground'>We've received your message and will get back to you shortly.</p>
 											</div>
 										) : (
-											<smarttouch-nexgen
-												form='4020'
-												client='2339'
-												span6='1,2,4,7,10898'
-												submit='Send Message'
-												spanmobile12='1,2,4,7,10898'></smarttouch-nexgen>
+											<form onSubmit={handleSubmit} className='space-y-6'>
+												<div className='grid md:grid-cols-2 gap-4'>
+													<div>
+														<label htmlFor='firstName' className='block text-sm font-medium text-navy mb-1'>First Name *</label>
+														<input
+															type='text'
+															id='firstName'
+															name='firstName'
+															required
+															value={formData.firstName}
+															onChange={handleChange}
+															className='w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-burgundy focus:border-transparent'
+														/>
+													</div>
+													<div>
+														<label htmlFor='lastName' className='block text-sm font-medium text-navy mb-1'>Last Name *</label>
+														<input
+															type='text'
+															id='lastName'
+															name='lastName'
+															required
+															value={formData.lastName}
+															onChange={handleChange}
+															className='w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-burgundy focus:border-transparent'
+														/>
+													</div>
+												</div>
+												<div className='grid md:grid-cols-2 gap-4'>
+													<div>
+														<label htmlFor='email' className='block text-sm font-medium text-navy mb-1'>Email *</label>
+														<input
+															type='email'
+															id='email'
+															name='email'
+															required
+															value={formData.email}
+															onChange={handleChange}
+															className='w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-burgundy focus:border-transparent'
+														/>
+													</div>
+													<div>
+														<label htmlFor='phone' className='block text-sm font-medium text-navy mb-1'>Phone</label>
+														<input
+															type='tel'
+															id='phone'
+															name='phone'
+															value={formData.phone}
+															onChange={handleChange}
+															className='w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-burgundy focus:border-transparent'
+														/>
+													</div>
+												</div>
+												<div>
+													<label htmlFor='interest' className='block text-sm font-medium text-navy mb-1'>I&apos;m Interested In</label>
+													<input
+														type='text'
+														id='interest'
+														name='interest'
+														placeholder='e.g., Building a custom home, Available plots...'
+														value={formData.interest}
+														onChange={handleChange}
+														className='w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-burgundy focus:border-transparent'
+													/>
+												</div>
+												<div>
+													<label htmlFor='message' className='block text-sm font-medium text-navy mb-1'>Message *</label>
+													<textarea
+														id='message'
+														name='message'
+														required
+														rows={5}
+														value={formData.message}
+														onChange={handleChange}
+														className='w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-burgundy focus:border-transparent resize-none'
+													/>
+												</div>
+												{error && (
+													<div className='p-3 bg-red-50 border border-red-200 rounded-md text-red-700 text-sm'>
+														{error}
+													</div>
+												)}
+												<button
+													type='submit'
+													disabled={isSubmitting}
+													className='w-full bg-burgundy hover:bg-burgundy/90 text-white font-medium py-3 px-6 rounded-md transition-colors disabled:opacity-50 disabled:cursor-not-allowed'
+												>
+													{isSubmitting ? 'Sending...' : 'Send Message'}
+												</button>
+											</form>
 										)}
 									</CardContent>
 								</Card>
