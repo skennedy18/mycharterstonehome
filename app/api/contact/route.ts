@@ -4,13 +4,8 @@ import { NextResponse } from 'next/server'
 const resend = new Resend(process.env.RESEND_API_KEY)
 
 export async function POST(request: Request) {
-  console.log('[v0] Contact API route hit')
-  console.log('[v0] RESEND_API_KEY exists:', !!process.env.RESEND_API_KEY)
-  
   try {
-    const body = await request.json()
-    console.log('[v0] Request body received:', JSON.stringify(body))
-    const { firstName, lastName, email, phone, interest, message } = body
+    const { firstName, lastName, email, phone, interest, message } = await request.json()
 
     // Validate required fields
     if (!firstName || !lastName || !email || !message) {
@@ -37,13 +32,11 @@ export async function POST(request: Request) {
     })
 
     if (error) {
-      console.log('[v0] Resend error details:', JSON.stringify(error, null, 2))
       return NextResponse.json({ error: 'Failed to send email' }, { status: 500 })
     }
 
     return NextResponse.json({ success: true, data })
-  } catch (error) {
-    console.log('[v0] Contact form catch error:', error)
+  } catch {
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
   }
 }
