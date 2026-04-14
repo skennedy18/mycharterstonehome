@@ -32,13 +32,13 @@ export async function POST(request: Request) {
     })
 
     if (error) {
-      console.error('Resend error:', error)
+      console.log('[v0] Resend error details:', JSON.stringify(error, null, 2))
       return NextResponse.json({ error: 'Failed to send email' }, { status: 500 })
     }
 
     return NextResponse.json({ success: true, data })
   } catch (error) {
-    console.error('Contact form error:', error)
+    console.log('[v0] Contact form catch error:', error)
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
   }
 }
