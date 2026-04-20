@@ -39,15 +39,15 @@ export function Navigation() {
 	];
 
 	return (
-		<nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-white/90 backdrop-blur-md shadow-lg' : 'bg-transparent'}`}>
+		<nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-gradient-to-b from-slate-900/95 via-slate-900/80 to-slate-900/60 backdrop-blur-md shadow-lg' : 'bg-gradient-to-b from-black/60 via-black/30 to-transparent'}`}>
 			<div className='container mx-auto px-4'>
 				<div className='flex items-center justify-between h-20'>
 					{/* Logo */}
 					<Link
 						href='/'
-						className='flex items-center'>
+						className='flex items-center -ml-4 md:-ml-6 lg:-ml-8'>
 						<Image
-							src='/logo.png'
+							src='/logo-transparent.png'
 							alt='Charterstone Homes'
 							width={240}
 							height={60}
@@ -62,9 +62,9 @@ export function Navigation() {
 							<Link
 								key={link.href}
 								href={link.href}
-								className='relative text-sm font-medium text-foreground hover:text-burgundy transition-colors group'>
+								className='relative text-sm font-medium text-white/90 hover:text-white transition-colors group'>
 								{link.label}
-								<span className='absolute bottom-0 left-0 w-0 h-0.5 bg-burgundy transition-all duration-300 group-hover:w-full' />
+								<span className='absolute bottom-0 left-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full' />
 							</Link>
 						))}
 					</div>
@@ -74,7 +74,7 @@ export function Navigation() {
 						<a
 							href='tel:+18477575571'
 							data-stlabel='Header - (847) 757-5571'
-							className='flex items-center gap-2 text-sm font-medium text-foreground hover:text-burgundy transition-colors'>
+							className='flex items-center gap-2 text-sm font-medium text-white/90 hover:text-white transition-colors'>
 							<Phone className='h-4 w-4' />
 							(847) 757-5571
 						</a>
@@ -86,7 +86,7 @@ export function Navigation() {
 					{/* Mobile Menu Button */}
 					<button
 						onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-						className='lg:hidden p-2 text-foreground hover:text-burgundy transition-colors'
+						className='lg:hidden p-2 text-white/90 hover:text-white transition-colors'
 						aria-label='Toggle menu'>
 						{isMobileMenuOpen ? <X className='h-6 w-6' /> : <Menu className='h-6 w-6' />}
 					</button>
@@ -94,22 +94,22 @@ export function Navigation() {
 			</div>
 
 			{isMobileMenuOpen && (
-				<div className='lg:hidden fixed inset-0 top-20 bg-white z-40 overflow-y-auto'>
+				<div className='lg:hidden fixed inset-0 top-20 bg-slate-900/95 backdrop-blur-md z-40 overflow-y-auto'>
 					<div className='flex flex-col p-6 gap-4'>
 						{navLinks.map((link) => (
 							<Link
 								key={link.href}
 								href={link.href}
 								onClick={() => setIsMobileMenuOpen(false)}
-								className='text-lg font-medium text-foreground hover:text-burgundy transition-colors py-2'>
+								className='text-lg font-medium text-white/90 hover:text-white transition-colors py-2'>
 								{link.label}
 							</Link>
 						))}
-						<div className='border-t border-border pt-4 mt-4'>
+						<div className='border-t border-white/20 pt-4 mt-4'>
 							<a
 								href='tel:+18477575571'
 								data-stlabel='Header - (847) 757-5571'
-								className='flex items-center gap-2 text-lg font-medium text-foreground hover:text-burgundy transition-colors py-2'>
+								className='flex items-center gap-2 text-lg font-medium text-white/90 hover:text-white transition-colors py-2'>
 								<Phone className='h-5 w-5' />
 								(847) 757-5571
 							</a>
