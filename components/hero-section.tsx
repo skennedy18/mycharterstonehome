@@ -16,14 +16,14 @@ export function HeroSection() {
 
       {/* Content */}
       <div className="relative z-10 text-center px-5 max-w-4xl mx-auto">
-        <p className="text-sm uppercase tracking-[0.15em] text-white/80 mb-4">
+        <p className="text-base uppercase tracking-[0.2em] text-white font-medium mb-4" style={{ textShadow: "0 2px 8px rgba(0,0,0,0.5)" }}>
           Welcome to Charterstone Homes
         </p>
         <h1 className="font-serif text-white mb-4 leading-[1.15]" style={{ fontWeight: 400 }}>
           Your Dream Home Awaits in Pecan Plantation
         </h1>
-        <p className="text-lg text-white/85 mb-8 max-w-2xl mx-auto font-light">
-          Luxury custom homes in Texas&rsquo;s premier golf &amp; aviation community
+        <p className="text-xl text-white font-normal mb-8 max-w-2xl mx-auto" style={{ textShadow: "0 2px 8px rgba(0,0,0,0.5)" }}>
+          Luxury Custom Homes in Texas&rsquo;s Premier Golf &amp; Aviation Community
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Link href="/models" className="btn-primary">

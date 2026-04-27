@@ -14,7 +14,7 @@ export function WelcomeSection() {
       >
         <div className="container mx-auto px-5 max-w-6xl">
           <p className="text-sm tracking-[0.1em] uppercase text-center text-white/90">
-            2 Championship Golf Courses &nbsp;·&nbsp; 3,200 Ft Runway &nbsp;·&nbsp; 7 Parks &nbsp;·&nbsp; 30+ Floor Plans
+            2 Championship Golf Courses &nbsp;·&nbsp; 3,200 Ft Runway &nbsp;·&nbsp; 7 Parks
           </p>
         </div>
       </section>

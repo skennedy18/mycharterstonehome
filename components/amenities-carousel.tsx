@@ -1,12 +1,14 @@
 export function AmenitiesCarousel() {
   const amenities = [
     "Championship Golf",
-    "Private Runway",
+    "Private Airstrip",
     "Marina & Lake",
-    "Dining",
-    "Fitness",
-    "Tennis",
-    "Pools",
+    "Country Club Dining",
+    "Fitness Center",
+    "Tennis & Pickleball",
+    "Swimming Pools",
+    "Equestrian Center",
+    "Trap & Skeet Range",
     "Community Events",
   ]
 
@@ -32,6 +34,16 @@ export function AmenitiesCarousel() {
           <p className="text-center text-white/90 text-sm tracking-[0.1em] uppercase">
             {amenities.join("  ·  ")}
           </p>
+        </div>
+        <div className="text-center mt-8">
+          <a
+            href="https://www.ppoaweb.com/Becoming_A_Member/Amenities,_Clubs_Groups"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-secondary-light"
+          >
+            View All Amenities
+          </a>
         </div>
       </div>
     </section>
