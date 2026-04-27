@@ -64,7 +64,7 @@ export default function RootLayout({
                 latitude: 32.3665,
                 longitude: -97.6903,
               },
-              url: "https://charterstonehomes.com",
+              url: "https://mycharterstonehome.com",
               telephone: "+1-847-757-5571",
               priceRange: "$$$",
               openingHoursSpecification: {

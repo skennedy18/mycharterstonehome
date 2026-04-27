@@ -135,10 +135,10 @@ export function Footer() {
 							<li className='flex items-center gap-2 text-sm text-white/80'>
 								<Mail className='h-5 w-5 flex-shrink-0' />
 								<a
-									href='mailto:info@charterstonehomes.com'
+									href='mailto:info@mycharterstonehome.com'
 									className='hover:text-champagne transition-colors'
-									data-stlabel='Footer - info@charterstonehomes.com'>
-									info@charterstonehomes.com
+									data-stlabel='Footer - info@mycharterstonehome.com'>
+									info@mycharterstonehome.com
 								</a>
 							</li>
 						</ul>

@@ -312,7 +312,7 @@ Phone: ${formData.phone}
 This question was submitted from the Available Homesites page.
     `);
 
-		window.location.href = `mailto:team@newrootseb5.com?subject=${subject}&body=${body}`;
+		window.location.href = `mailto:info@mycharterstonehome.com?subject=${subject}&body=${body}`;
 
 		setIsDialogOpen(false);
 		setFormData({ firstName: '', lastName: '', email: '', phone: '' });

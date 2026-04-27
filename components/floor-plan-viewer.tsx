@@ -101,7 +101,7 @@ Phone: ${formData.phone}
 This request was submitted from the Floor Plans page.
     `);
 
-		window.location.href = `mailto:team@newrootseb5.com?subject=${subject}&body=${body}`;
+		window.location.href = `mailto:info@mycharterstonehome.com?subject=${subject}&body=${body}`;
 
 		// Show success state and reset form
 		setIsSubmitted(true);

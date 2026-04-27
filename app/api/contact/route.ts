@@ -16,8 +16,8 @@ export async function POST(request: Request) {
     }
 
     const { data, error } = await resend.emails.send({
-      from: 'Charterstone Contact <onboarding@resend.dev>',
-      to: ['mathew@newrootseb5.com'],
+      from: 'Charterstone Contact <contact@mycharterstonehome.com>',
+      to: ['info@mycharterstonehome.com'],
       replyTo: email,
       subject: `New Contact Form Submission from ${firstName} ${lastName}`,
       html: `
