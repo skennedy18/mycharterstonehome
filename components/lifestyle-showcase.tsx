@@ -1,86 +1,70 @@
-"use client"
-
-import type React from "react"
-
-import { Card, CardContent } from "@/components/ui/card"
-import { Plane, Trophy, Users } from "lucide-react"
-import { useState } from "react"
+import Image from "next/image"
 
 interface Lifestyle {
   title: string
-  icon: React.ReactNode
+  description: string
   image: string
-  features: string[]
 }
 
 const lifestyles: Lifestyle[] = [
   {
-    title: "Golf Enthusiast",
-    icon: <Trophy className="h-8 w-8" />,
+    title: "36 Holes From Your Front Door",
+    description:
+      "Pecan Plantation's two championship courses wind through the community, with tee times just minutes from home. The clubhouse, pro shop, and golf academy are all part of daily life here.",
     image: "/championship-golf-course-pecan-plantation.jpg",
-    features: ["36 Holes Championship Golf", "Pro Shop & Lessons", "Golf Academy Programs"],
   },
   {
-    title: "Aviation Lover",
-    icon: <Plane className="h-8 w-8" />,
+    title: "A Runway in Your Backyard",
+    description:
+      "The community's 3,200-foot private runway and hangar home options make Pecan Plantation one of the few true fly-in communities in Texas. An active pilots association keeps the aviation spirit alive.",
     image: "/private-runway-aviation-community.jpg",
-    features: ["3,200 Ft Private Runway", "Hangar Home Options", "Active Pilots Association"],
   },
   {
-    title: "Family Living",
-    icon: <Users className="h-8 w-8" />,
+    title: "Room to Grow",
+    description:
+      "Top-rated schools, youth programs, and a safe gated community make Pecan Plantation ideal for families. With 30+ parks and miles of trails, there's always somewhere new to explore.",
     image: "/family-friendly-community-parks.jpg",
-    features: ["Top-Rated Schools", "Youth Programs", "Safe Gated Community"],
   },
 ]
 
 export function LifestyleShowcase() {
-  const [activeIndex, setActiveIndex] = useState(0)
-
   return (
-    <section className="py-20 bg-white">
-      <div className="container mx-auto px-4">
-        <div className="text-center mb-12">
-          <h2 className="font-serif text-4xl md:text-5xl font-bold text-navy mb-4">Your Lifestyle Awaits</h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Pecan Plantation offers something special for everyone. Choose the lifestyle that speaks to you.
-          </p>
-        </div>
+    <section className="py-16 md:py-20" style={{ backgroundColor: "var(--color-bg)" }}>
+      <div className="container mx-auto px-5 max-w-6xl">
+        <h2 className="font-serif mb-3" style={{ color: "var(--color-text)" }}>
+          Life in Pecan Plantation
+        </h2>
+        <p className="text-base mb-12" style={{ color: "var(--color-text-muted)" }}>
+          More than a home — a way of life.
+        </p>
 
-        <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
-          {lifestyles.map((lifestyle, index) => (
-            <Card
+        <div className="space-y-16">
+          {lifestyles.map((item, index) => (
+            <div
               key={index}
-              className={`cursor-pointer transition-all duration-300 hover:shadow-xl ${
-                activeIndex === index ? "ring-2 ring-burgundy scale-105" : ""
+              className={`grid md:grid-cols-11 gap-8 items-center ${
+                index % 2 === 1 ? "md:direction-rtl" : ""
               }`}
-              onMouseEnter={() => setActiveIndex(index)}
             >
-              <CardContent className="p-0">
-                <div className="relative h-64 overflow-hidden rounded-t-lg">
-                  <img
-                    src={lifestyle.image || "/placeholder.svg"}
-                    alt={lifestyle.title}
-                    className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                  <div className="absolute bottom-4 left-4 text-white">
-                    <div className="mb-2">{lifestyle.icon}</div>
-                    <h3 className="font-serif text-2xl font-bold">{lifestyle.title}</h3>
-                  </div>
-                </div>
-                <div className="p-6">
-                  <ul className="space-y-2">
-                    {lifestyle.features.map((feature, idx) => (
-                      <li key={idx} className="flex items-center gap-2 text-sm text-muted-foreground">
-                        <div className="h-1.5 w-1.5 rounded-full bg-champagne" />
-                        {feature}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </CardContent>
-            </Card>
+              <div className={`md:col-span-6 ${index % 2 === 1 ? "md:order-2" : ""}`}>
+                <Image
+                  src={item.image}
+                  alt={item.title}
+                  width={700}
+                  height={467}
+                  className="w-full object-cover rounded-sm"
+                  style={{ aspectRatio: "3/2", border: "1px solid var(--color-border)" }}
+                />
+              </div>
+              <div className={`md:col-span-5 ${index % 2 === 1 ? "md:order-1" : ""}`}>
+                <h3 className="font-serif mb-3" style={{ color: "var(--color-text)" }}>
+                  {item.title}
+                </h3>
+                <p className="text-base leading-relaxed" style={{ color: "var(--color-text-muted)" }}>
+                  {item.description}
+                </p>
+              </div>
+            </div>
           ))}
         </div>
       </div>

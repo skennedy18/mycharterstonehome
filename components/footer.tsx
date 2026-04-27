@@ -1,29 +1,13 @@
 'use client';
 
-import type React from 'react';
-
-import { Facebook, Instagram, Linkedin, Mail, MapPin, Phone } from 'lucide-react';
+import { Mail, MapPin, Phone } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useState } from 'react';
 
 export function Footer() {
-	const [email, setEmail] = useState('');
-	const [isSubmitted, setIsSubmitted] = useState(false);
-
-	const handleNewsletterSubmit = (e: React.FormEvent) => {
-		e.preventDefault();
-		setIsSubmitted(true);
-		setTimeout(() => {
-			setIsSubmitted(false);
-			setEmail('');
-		}, 3000);
-	};
-
 	return (
-		<footer className='bg-navy text-white'>
-			{/* Main Footer Content */}
-			<div className='container mx-auto px-4 py-12'>
+		<footer style={{ backgroundColor: '#354430' }}>
+			<div className='container mx-auto px-5 py-12 max-w-6xl'>
 				<div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8'>
 					{/* Company Info */}
 					<div>
@@ -32,112 +16,76 @@ export function Footer() {
 							alt='Charterstone Homes'
 							width={180}
 							height={60}
-							className='h-12 w-auto mb-4 brightness-0 invert'
+							className='h-10 w-auto mb-4 brightness-0 invert'
 						/>
-						<p className='text-sm text-white/80 mb-4'>Building luxury custom homes in Pecan Plantation's premier golf and aviation community.</p>
-						<div className='flex gap-4'>
-							<a
-								href='https://facebook.com'
-								target='_blank'
-								rel='noopener noreferrer'
-								className='hover:text-champagne transition-colors'
-								aria-label='Facebook'
-								data-sttrack='Click Through'
-								data-stlabel='Facebook Icon'>
-								<Facebook className='h-5 w-5' />
-							</a>
-							<a
-								href='https://instagram.com'
-								target='_blank'
-								rel='noopener noreferrer'
-								className='hover:text-champagne transition-colors'
-								aria-label='Instagram'
-								data-sttrack='Click Through'
-								data-stlabel='Instagram Icon'>
-								<Instagram className='h-5 w-5' />
-							</a>
-							<a
-								href='https://linkedin.com'
-								target='_blank'
-								rel='noopener noreferrer'
-								className='hover:text-champagne transition-colors'
-								aria-label='LinkedIn'
-								data-sttrack='Click Through'
-								data-stlabel='LinkedIn Icon'>
-								<Linkedin className='h-5 w-5' />
-							</a>
-						</div>
+						<p className='text-sm leading-relaxed' style={{ color: 'rgba(255,255,255,0.7)' }}>
+							Building luxury custom homes in Pecan Plantation&rsquo;s premier golf and aviation community.
+						</p>
 					</div>
 
 					{/* Quick Links */}
 					<div>
-						<h3 className='font-serif text-lg font-semibold mb-4'>Quick Links</h3>
+						<h3
+							className='text-[12px] tracking-[0.12em] uppercase font-medium mb-4'
+							style={{ color: 'rgba(255,255,255,0.9)', fontFamily: 'var(--font-body), Outfit, sans-serif' }}
+						>
+							Quick Links
+						</h3>
 						<ul className='space-y-2'>
-							<li>
-								<Link
-									href='/models'
-									className='text-sm text-white/80 hover:text-champagne transition-colors'>
-									Floor Plans
-								</Link>
-							</li>
-							<li>
-								<Link
-									href='/available-plots'
-									className='text-sm text-white/80 hover:text-champagne transition-colors'>
-									Available Homesites
-								</Link>
-							</li>
-							<li>
-								<Link
-									href='/gallery'
-									className='text-sm text-white/80 hover:text-champagne transition-colors'>
-									Gallery
-								</Link>
-							</li>
-							<li>
-								<Link
-									href='/about'
-									className='text-sm text-white/80 hover:text-champagne transition-colors'>
-									About Us
-								</Link>
-							</li>
-							<li>
-								<Link
-									href='/contact'
-									className='text-sm text-white/80 hover:text-champagne transition-colors'>
-									Contact
-								</Link>
-							</li>
+							{[
+								{ href: '/models', label: 'Floor Plans' },
+								{ href: '/available-plots', label: 'Available Homesites' },
+								{ href: '/gallery', label: 'Gallery' },
+								{ href: '/about', label: 'About Us' },
+								{ href: '/contact', label: 'Contact' },
+							].map((link) => (
+								<li key={link.href}>
+									<Link
+										href={link.href}
+										className='text-sm transition-opacity duration-300 opacity-70 hover:opacity-100'
+										style={{ color: 'rgba(255,255,255,0.9)' }}
+									>
+										{link.label}
+									</Link>
+								</li>
+							))}
 						</ul>
 					</div>
 
 					{/* Contact Info */}
 					<div>
-						<h3 className='font-serif text-lg font-semibold mb-4'>Contact Us</h3>
+						<h3
+							className='text-[12px] tracking-[0.12em] uppercase font-medium mb-4'
+							style={{ color: 'rgba(255,255,255,0.9)', fontFamily: 'var(--font-body), Outfit, sans-serif' }}
+						>
+							Contact Us
+						</h3>
 						<ul className='space-y-3'>
-							<li className='flex items-start gap-2 text-sm text-white/80'>
-								<MapPin className='h-5 w-5 flex-shrink-0 mt-0.5' />
+							<li className='flex items-start gap-2 text-sm' style={{ color: 'rgba(255,255,255,0.7)' }}>
+								<MapPin className='h-4 w-4 flex-shrink-0 mt-0.5' />
 								<span>
-									Pecan Plantation
-									<br />
-									Granbury, TX 76049
+									Pecan Plantation<br />Granbury, TX 76049
 								</span>
 							</li>
-							<li className='flex items-center gap-2 text-sm text-white/80'>
-								<Phone className='h-5 w-5 flex-shrink-0' />
+							<li className='flex items-center gap-2 text-sm' style={{ color: 'rgba(255,255,255,0.7)' }}>
+								<Phone className='h-4 w-4 flex-shrink-0' />
 								<a
 									href='tel:+18477575571'
 									data-stlabel='Footer - (847) 757-5571'
-									className='hover:text-champagne transition-colors'>
+									className='transition-opacity duration-300 opacity-70 hover:opacity-100'
+									style={{ color: 'rgba(255,255,255,0.9)' }}
+								>
 									(847) 757-5571
 								</a>
 							</li>
-							<li className='flex items-center gap-2 text-sm text-white/80'>
-								<Mail className='h-5 w-5 flex-shrink-0' />
+							<li className='flex items-center gap-2 text-sm' style={{ color: 'rgba(255,255,255,0.7)' }}>
+								<Mail className='h-4 w-4 flex-shrink-0' />
 								<a
 									href='mailto:info@mycharterstonehome.com'
-									className='hover:text-champagne transition-colors'
-									data-stlabel='Footer - info@mycharterstonehome.com'>
+									className='transition-opacity duration-300 opacity-70 hover:opacity-100'
+									data-stlabel='Footer - info@mycharterstonehome.com'
+									style={{ color: 'rgba(255,255,255,0.9)' }}
+								>
 									info@mycharterstonehome.com
 								</a>
 							</li>
@@ -146,8 +94,15 @@ export function Footer() {
 
 					{/* Newsletter */}
 					<div>
-						<h3 className='font-serif text-lg font-semibold mb-4'>Stay Updated</h3>
-						<p className='text-sm text-white/80 mb-4'>Subscribe to receive updates on new models and exclusive offers.</p>
+						<h3
+							className='text-[12px] tracking-[0.12em] uppercase font-medium mb-4'
+							style={{ color: 'rgba(255,255,255,0.9)', fontFamily: 'var(--font-body), Outfit, sans-serif' }}
+						>
+							Stay Updated
+						</h3>
+						<p className='text-sm mb-4' style={{ color: 'rgba(255,255,255,0.7)' }}>
+							Subscribe to receive updates on new models and exclusive offers.
+						</p>
 						<smarttouch-nexgen
 							id='subscribe-form'
 							form='4026'
@@ -163,34 +118,27 @@ export function Footer() {
 			</div>
 
 			{/* Trust Signals */}
-			<div className='border-t border-white/10'>
-				<div className='container mx-auto px-4 py-6'>
-					<div className='flex flex-wrap items-center justify-center gap-6 text-xs text-white/60'>
-						<span>Energy Star Certified</span>
-						<span className='hidden sm:inline'>•</span>
-						<span>10-Year Structural Warranty</span>
-						<span className='hidden sm:inline'>•</span>
-						<span>Preferred Builder</span>
-						<span className='hidden sm:inline'>•</span>
-						<span>Equal Housing Opportunity</span>
-					</div>
+			<div style={{ borderTop: '1px solid rgba(255,255,255,0.1)' }}>
+				<div className='container mx-auto px-5 py-5 max-w-6xl'>
+					<p
+						className='text-center text-[11px] tracking-wide'
+						style={{ color: 'rgba(255,255,255,0.5)' }}
+					>
+						Energy Star Certified &nbsp;·&nbsp; 10-Year Structural Warranty &nbsp;·&nbsp; Preferred Builder &nbsp;·&nbsp; Equal Housing Opportunity
+					</p>
 				</div>
 			</div>
 
 			{/* Bottom Bar */}
-			<div className='border-t border-white/10'>
-				<div className='container mx-auto px-4 py-4'>
-					<div className='flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-white/60'>
+			<div style={{ borderTop: '1px solid rgba(255,255,255,0.1)' }}>
+				<div className='container mx-auto px-5 py-4 max-w-6xl'>
+					<div className='flex flex-col sm:flex-row items-center justify-between gap-4 text-xs' style={{ color: 'rgba(255,255,255,0.5)' }}>
 						<p>&copy; {new Date().getFullYear()} Charterstone Homes. All rights reserved.</p>
 						<div className='flex gap-4'>
-							<Link
-								href='/privacy'
-								className='hover:text-champagne transition-colors'>
+							<Link href='/privacy' className='transition-opacity duration-300 hover:opacity-100'>
 								Privacy Policy
 							</Link>
-							<Link
-								href='/terms'
-								className='hover:text-champagne transition-colors'>
+							<Link href='/terms' className='transition-opacity duration-300 hover:opacity-100'>
 								Terms of Service
 							</Link>
 						</div>

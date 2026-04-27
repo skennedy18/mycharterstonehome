@@ -2,7 +2,6 @@
 
 import { Navigation } from "@/components/navigation"
 import { Footer } from "@/components/footer"
-import { Card, CardContent } from "@/components/ui/card"
 
 const team = [
   {
@@ -19,20 +18,17 @@ const testimonials = [
     home: "The Oakmont",
     quote:
       "Building with Charterstone was a dream come true. The attention to detail and quality craftsmanship exceeded our expectations.",
-    image: "/testimonial-couple-1.jpg",
   },
   {
     name: "James Martinez",
     home: "The Aviator",
     quote:
       "As a pilot, having a hangar home was essential. Charterstone made the process seamless and delivered exactly what we wanted.",
-    image: "/testimonial-pilot.jpg",
   },
   {
     name: "The Anderson Family",
     home: "The Magnolia",
     quote: "We love our new home and the Pecan Plantation community. Charterstone helped us every step of the way.",
-    image: "/testimonial-family.jpg",
   },
 ]
 
@@ -42,80 +38,85 @@ export default function AboutPage() {
       <Navigation />
       <div className="pt-20">
         {/* Hero Section */}
-        <section className="bg-gradient-to-r from-burgundy to-navy text-white py-16">
-          <div className="container mx-auto px-4">
-            <h1 className="font-serif text-4xl md:text-6xl font-bold mb-4">About Charterstone Homes</h1>
-            <p className="text-xl text-white/90 max-w-2xl">
+        <section
+          className="relative min-h-[50vh] flex items-end overflow-hidden"
+          style={{ backgroundImage: "url('/championship-golf-course-pecan-plantation.jpg')", backgroundSize: "cover", backgroundPosition: "center" }}
+        >
+          <div className="absolute inset-0 bg-gradient-to-b from-black/15 to-black/50" />
+          <div className="relative z-10 container mx-auto px-5 pb-12 max-w-6xl">
+            <h1 className="font-serif text-white">About Charterstone Homes</h1>
+            <p className="text-base text-white/85 max-w-xl mt-3">
               Building dreams and creating lasting legacies in Pecan Plantation since 2015.
             </p>
           </div>
         </section>
 
         {/* Our Story */}
-        <section className="py-20 bg-white">
-          <div className="container mx-auto px-4">
-            <div className="max-w-4xl mx-auto text-center mb-16">
-              <h2 className="font-serif text-4xl md:text-5xl font-bold text-navy mb-6">Our Story</h2>
-              <p className="text-lg text-muted-foreground leading-relaxed">
-                Charterstone Homes was founded with a simple mission: to build exceptional custom homes that reflect the
-                unique lifestyle and dreams of each homeowner. Over the years, we've become the preferred builder in
-                Pecan Plantation, known for our commitment to quality, innovation, and customer satisfaction.
-              </p>
+        <section className="py-16 md:py-20" style={{ backgroundColor: "var(--color-bg)" }}>
+          <div className="container mx-auto px-5 max-w-6xl">
+            <div className="grid md:grid-cols-5 gap-10 items-start">
+              <div className="md:col-span-3">
+                <h2 className="font-serif mb-3" style={{ color: "var(--color-text)" }}>Our Story</h2>
+                <p className="text-base leading-relaxed" style={{ color: "var(--color-text-muted)" }}>
+                  Charterstone Homes was founded with a simple mission: to build exceptional custom homes that reflect the
+                  unique lifestyle and dreams of each homeowner. Over the years, we&rsquo;ve become the preferred builder in
+                  Pecan Plantation, known for our commitment to quality, innovation, and customer satisfaction.
+                </p>
+              </div>
+              <div className="md:col-span-2">
+                <img
+                  src="/elevations/bluebird-elevation-b-rendered.jpg"
+                  alt="Charterstone home"
+                  className="w-full object-cover rounded-sm"
+                  style={{ aspectRatio: "3/2", border: "1px solid var(--color-border)" }}
+                />
+              </div>
             </div>
           </div>
         </section>
 
         {/* Team */}
-        <section className="pb-20 bg-white">
-          <div className="container mx-auto px-4">
-            <h2 className="font-serif text-4xl md:text-5xl font-bold text-navy text-center mb-12">Meet Our Team</h2>
-            <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        <section className="py-16 md:py-20" style={{ backgroundColor: "var(--color-bg-alt)" }}>
+          <div className="container mx-auto px-5 max-w-6xl">
+            <h2 className="font-serif mb-10" style={{ color: "var(--color-text)" }}>Meet Our Team</h2>
+            <div className="max-w-3xl">
               {team.map((member, index) => (
-                <Card key={index} className="overflow-hidden hover:shadow-xl transition-shadow">
-                  <CardContent className="p-0">
-                    <div className="relative h-80 overflow-hidden bg-gray-100 flex items-center justify-center">
-                      <img
-                        src={member.image || "/placeholder.svg"}
-                        alt={member.name}
-                        className="w-full h-full object-contain"
-                      />
-                    </div>
-                    <div className="p-6">
-                      <h3 className="font-serif text-xl font-bold text-navy mb-1">{member.name}</h3>
-                      <p className="text-sm text-burgundy font-medium mb-3">{member.role}</p>
-                      <p className="text-sm text-muted-foreground leading-relaxed">{member.bio}</p>
-                    </div>
-                  </CardContent>
-                </Card>
+                <div key={index} className="flex flex-col md:flex-row gap-8 items-start">
+                  <div className="w-48 flex-shrink-0">
+                    <img
+                      src={member.image || "/placeholder.svg"}
+                      alt={member.name}
+                      className="w-full rounded-sm"
+                      style={{ border: "1px solid var(--color-border)" }}
+                    />
+                  </div>
+                  <div>
+                    <h3 className="font-serif mb-1" style={{ color: "var(--color-text)" }}>{member.name}</h3>
+                    <p className="text-sm uppercase tracking-[0.08em] mb-3" style={{ color: "var(--color-accent)" }}>
+                      {member.role}
+                    </p>
+                    <p className="text-sm leading-relaxed" style={{ color: "var(--color-text-muted)" }}>{member.bio}</p>
+                  </div>
+                </div>
               ))}
             </div>
           </div>
         </section>
 
         {/* Testimonials */}
-        <section className="py-20 bg-navy text-white">
-          <div className="container mx-auto px-4">
-            <h2 className="font-serif text-4xl md:text-5xl font-bold text-center mb-12">What Our Clients Say</h2>
-            <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        <section className="py-16 md:py-20" style={{ backgroundColor: "var(--color-primary-dark)", color: "rgba(255,255,255,0.9)" }}>
+          <div className="container mx-auto px-5 max-w-6xl">
+            <h2 className="font-serif mb-10 text-white">What Our Clients Say</h2>
+            <div className="space-y-10 max-w-3xl">
               {testimonials.map((testimonial, index) => (
-                <Card key={index} className="bg-white/10 backdrop-blur-sm border-white/20">
-                  <CardContent className="p-6">
-                    <div className="flex items-center gap-4 mb-4">
-                      <div className="w-16 h-16 rounded-full overflow-hidden bg-white/20">
-                        <img
-                          src={testimonial.image || "/placeholder.svg"}
-                          alt={testimonial.name}
-                          className="w-full h-full object-cover"
-                        />
-                      </div>
-                      <div>
-                        <h3 className="font-semibold text-white">{testimonial.name}</h3>
-                        <p className="text-sm text-white/70">{testimonial.home}</p>
-                      </div>
-                    </div>
-                    <p className="text-white/90 italic leading-relaxed">"{testimonial.quote}"</p>
-                  </CardContent>
-                </Card>
+                <div key={index}>
+                  <p className="font-serif italic text-[1.2rem] leading-relaxed text-white/90 mb-4">
+                    &ldquo;{testimonial.quote}&rdquo;
+                  </p>
+                  <p className="text-sm" style={{ color: "rgba(255,255,255,0.6)" }}>
+                    {testimonial.name} — {testimonial.home}
+                  </p>
+                </div>
               ))}
             </div>
           </div>

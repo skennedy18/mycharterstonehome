@@ -1,16 +1,10 @@
-"use client"
-
-import { Card, CardContent, CardFooter } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
-import { Bed, Bath, Maximize, Car } from "lucide-react"
 import Link from "next/link"
 
 interface Model {
   name: string
   image: string
   beds: number
-  baths: number
+  baths: number | string
   sqft: string
   garage: number
   price: string
@@ -44,7 +38,7 @@ const models: Model[] = [
     image:
       "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/2180%20Middlewood%20Cir_Cardinal.png-6jlcNpFIPksnSKEB9HTFz9J3EJXKNE.jpeg",
     beds: 4,
-    baths: 3.5,
+    baths: "3.5",
     sqft: "2,905",
     garage: 3,
     price: "$490,000",
@@ -65,70 +59,62 @@ const models: Model[] = [
 
 export function FeaturedModels() {
   return (
-    <section className="py-20 bg-gray-50">
-      <div className="container mx-auto px-4">
-        <div className="text-center mb-12">
-          <h2 className="font-serif text-4xl md:text-5xl font-bold text-navy mb-4">Featured Home Models</h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Explore our most popular floor plans, each designed with luxury and functionality in mind.
-          </p>
+    <section className="py-16 md:py-20" style={{ backgroundColor: "var(--color-bg-alt)" }}>
+      <div className="container mx-auto px-5 max-w-6xl">
+        <div className="mb-3">
+          <h2 className="font-serif" style={{ color: "var(--color-text)" }}>Featured Home Models</h2>
         </div>
+        <p className="text-base mb-10" style={{ color: "var(--color-text-muted)" }}>
+          Explore our most popular floor plans, each designed with luxury and functionality in mind.
+        </p>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
+        <div className="grid md:grid-cols-2 gap-6">
           {models.map((model, index) => (
-            <Card key={index} className="overflow-hidden group hover:shadow-2xl transition-shadow duration-300">
-              <CardContent className="p-0">
-                <div className="relative h-64 overflow-hidden">
-                  <img
-                    src={model.image || "/placeholder.svg"}
-                    alt={model.name}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                  />
-                  {model.available && (
-                    <Badge className="absolute top-4 right-4 bg-champagne text-navy animate-pulse">Available Now</Badge>
-                  )}
-                </div>
-                <div className="p-6">
-                  <h3 className="font-serif text-2xl font-bold text-navy mb-2">{model.name}</h3>
-                  <p className="text-2xl font-bold text-burgundy mb-4">Starting at {model.price}</p>
-                  <div className="grid grid-cols-2 gap-4 text-sm text-muted-foreground">
-                    <div className="flex items-center gap-2">
-                      <Bed className="h-4 w-4" />
-                      <span>{model.beds} Beds</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <Bath className="h-4 w-4" />
-                      <span>{model.baths} Baths</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <Maximize className="h-4 w-4" />
-                      <span>{model.sqft} Sq Ft</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <Car className="h-4 w-4" />
-                      <span>{model.garage} Car Garage</span>
-                    </div>
-                  </div>
-                </div>
-              </CardContent>
-              <CardFooter className="p-6 pt-0">
-                <Button asChild className="w-full bg-burgundy hover:bg-burgundy/90 text-white">
-                  <Link href="/models">View Details</Link>
-                </Button>
-              </CardFooter>
-            </Card>
+            <div
+              key={index}
+              className="rounded-sm overflow-hidden"
+              style={{ border: "1px solid var(--color-border)", backgroundColor: "var(--color-bg)" }}
+            >
+              <div className="overflow-hidden">
+                <img
+                  src={model.image || "/placeholder.svg"}
+                  alt={model.name}
+                  className="w-full object-cover transition-transform duration-600 hover:scale-[1.03]"
+                  style={{ aspectRatio: "4/3" }}
+                />
+              </div>
+              <div className="p-6">
+                {model.available && (
+                  <p
+                    className="text-[11px] tracking-[0.1em] uppercase mb-2"
+                    style={{ color: "var(--color-accent)" }}
+                  >
+                    Available Now
+                  </p>
+                )}
+                <h3 className="font-serif mb-1" style={{ color: "var(--color-text)" }}>{model.name}</h3>
+                <p className="text-base mb-3" style={{ color: "var(--color-text)" }}>
+                  Starting at {model.price}
+                </p>
+                <p className="text-[13px] font-light mb-4" style={{ color: "var(--color-text-muted)" }}>
+                  {model.beds} Bed · {model.baths} Bath · {model.sqft} Sq Ft · {model.garage} Car
+                </p>
+                <Link
+                  href="/models"
+                  className="text-[13px] tracking-[0.05em] uppercase underline underline-offset-4 transition-colors duration-300"
+                  style={{ color: "var(--color-primary)" }}
+                >
+                  View Details
+                </Link>
+              </div>
+            </div>
           ))}
         </div>
 
-        <div className="text-center mt-12">
-          <Button
-            asChild
-            size="lg"
-            variant="outline"
-            className="border-burgundy text-burgundy hover:bg-burgundy hover:text-white bg-transparent"
-          >
-            <Link href="/models">View All Floor Plans</Link>
-          </Button>
+        <div className="mt-10">
+          <Link href="/models" className="btn-secondary">
+            View All Floor Plans
+          </Link>
         </div>
       </div>
     </section>

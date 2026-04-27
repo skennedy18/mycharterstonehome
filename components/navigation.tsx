@@ -1,6 +1,5 @@
 'use client';
 
-import { Button } from '@/components/ui/button';
 import { Menu, Phone, X } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -39,84 +38,118 @@ export function Navigation() {
 	];
 
 	return (
-		<nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-gradient-to-b from-slate-900/95 via-slate-900/80 to-slate-900/60 backdrop-blur-md shadow-lg' : 'bg-gradient-to-b from-black/60 via-black/30 to-transparent'}`}>
-			<div className='container mx-auto px-4'>
+		<nav
+			className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+				isScrolled
+					? 'backdrop-blur-[10px]'
+					: 'bg-gradient-to-b from-black/50 to-transparent'
+			}`}
+			style={isScrolled ? {
+				backgroundColor: 'rgba(250, 248, 245, 0.95)',
+				borderBottom: '1px solid var(--color-border)',
+			} : undefined}
+		>
+			<div className='container mx-auto px-5'>
 				<div className='flex items-center justify-between h-20'>
-					{/* Logo */}
-					<Link
-						href='/'
-						className='flex items-center -ml-4 md:-ml-6 lg:-ml-8'>
+					<Link href='/' className='flex items-center'>
 						<Image
 							src='/logo-transparent.png'
 							alt='Charterstone Homes'
-							width={240}
-							height={60}
-							className='h-12 w-auto'
+							width={200}
+							height={40}
+							className='h-10 w-auto'
+							style={isScrolled ? { filter: 'brightness(0.2)' } : undefined}
 							priority
 						/>
 					</Link>
 
-					{/* Desktop Navigation */}
 					<div className='hidden lg:flex items-center gap-8'>
 						{navLinks.map((link) => (
 							<Link
 								key={link.href}
 								href={link.href}
-								className='relative text-sm font-medium text-white/90 hover:text-white transition-colors group'>
+								className='text-[13px] font-light uppercase tracking-[0.05em] transition-colors duration-300'
+								style={{
+									color: isScrolled ? 'var(--color-text-muted)' : 'rgba(255,255,255,0.85)',
+								}}
+							>
 								{link.label}
-								<span className='absolute bottom-0 left-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full' />
 							</Link>
 						))}
 					</div>
 
-					{/* Desktop CTA */}
 					<div className='hidden lg:flex items-center gap-4'>
 						<a
 							href='tel:+18477575571'
 							data-stlabel='Header - (847) 757-5571'
-							className='flex items-center gap-2 text-sm font-medium text-white/90 hover:text-white transition-colors'>
-							<Phone className='h-4 w-4' />
+							className='flex items-center gap-2 text-[13px] font-light transition-colors duration-300'
+							style={{
+								color: isScrolled ? 'var(--color-text-muted)' : 'rgba(255,255,255,0.85)',
+							}}
+						>
+							<Phone className='h-3.5 w-3.5' />
 							(847) 757-5571
 						</a>
-						<Link href='/contact'>
-							<Button className='bg-burgundy hover:bg-burgundy/90 text-white'>Schedule Tour</Button>
+						<Link
+							href='/contact'
+							className='text-[12px] font-normal uppercase tracking-[0.08em] rounded-sm transition-all duration-300'
+							style={{
+								padding: '8px 20px',
+								border: isScrolled ? '1px solid var(--color-primary)' : '1px solid rgba(255,255,255,0.7)',
+								color: isScrolled ? 'var(--color-primary)' : 'rgba(255,255,255,0.9)',
+							}}
+						>
+							Schedule Tour
 						</Link>
 					</div>
 
-					{/* Mobile Menu Button */}
 					<button
 						onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-						className='lg:hidden p-2 text-white/90 hover:text-white transition-colors'
-						aria-label='Toggle menu'>
+						className='lg:hidden p-2 transition-colors'
+						style={{ color: isScrolled ? 'var(--color-text)' : 'rgba(255,255,255,0.9)' }}
+						aria-label='Toggle menu'
+					>
 						{isMobileMenuOpen ? <X className='h-6 w-6' /> : <Menu className='h-6 w-6' />}
 					</button>
 				</div>
 			</div>
 
 			{isMobileMenuOpen && (
-				<div className='lg:hidden fixed inset-0 top-20 bg-slate-900/95 backdrop-blur-md z-40 overflow-y-auto'>
-					<div className='flex flex-col p-6 gap-4'>
+				<div
+					className='lg:hidden fixed inset-0 top-20 z-40 overflow-y-auto'
+					style={{ backgroundColor: 'var(--color-bg)' }}
+				>
+					<div className='flex flex-col p-6 gap-2'>
 						{navLinks.map((link) => (
 							<Link
 								key={link.href}
 								href={link.href}
 								onClick={() => setIsMobileMenuOpen(false)}
-								className='text-lg font-medium text-white/90 hover:text-white transition-colors py-2'>
+								className='text-base font-light py-3 transition-colors'
+								style={{
+									color: 'var(--color-text)',
+									borderBottom: '1px solid var(--color-border)',
+								}}
+							>
 								{link.label}
 							</Link>
 						))}
-						<div className='border-t border-white/20 pt-4 mt-4'>
+						<div className='pt-4 mt-2'>
 							<a
 								href='tel:+18477575571'
 								data-stlabel='Header - (847) 757-5571'
-								className='flex items-center gap-2 text-lg font-medium text-white/90 hover:text-white transition-colors py-2'>
-								<Phone className='h-5 w-5' />
+								className='flex items-center gap-2 text-base font-light py-3'
+								style={{ color: 'var(--color-text-muted)' }}
+							>
+								<Phone className='h-4 w-4' />
 								(847) 757-5571
 							</a>
 							<Link
 								href='/contact'
-								onClick={() => setIsMobileMenuOpen(false)}>
-								<Button className='w-full mt-4 bg-burgundy hover:bg-burgundy/90 text-white'>Schedule Tour</Button>
+								onClick={() => setIsMobileMenuOpen(false)}
+								className='btn-primary block text-center mt-4'
+							>
+								Schedule Tour
 							</Link>
 						</div>
 					</div>

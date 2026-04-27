@@ -1,19 +1,21 @@
 import { GoogleTagManager } from "@next/third-parties/google"
 import { Analytics } from "@vercel/analytics/next"
-import { Geist, Geist_Mono } from "next/font/google"
+import { DM_Serif_Display, Outfit } from "next/font/google"
 import type { Metadata } from "next"
 import type React from "react"
 import { Suspense } from "react"
 import "./globals.css"
 
-const geistSans = Geist({
+const dmSerif = DM_Serif_Display({
   subsets: ["latin"],
-  variable: "--font-geist-sans",
+  weight: "400",
+  variable: "--font-heading",
 })
 
-const geistMono = Geist_Mono({
+const outfit = Outfit({
   subsets: ["latin"],
-  variable: "--font-geist-mono",
+  weight: ["300", "400", "500"],
+  variable: "--font-body",
 })
 
 export const metadata: Metadata = {
@@ -80,7 +82,7 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <script defer src="https://storage.smarttouchinteractive.com/source/forms/smarttouch.js"></script>
       </head>
-      <body className={`font-sans ${geistSans.variable} ${geistMono.variable} antialiased`}>
+      <body className={`${dmSerif.variable} ${outfit.variable} antialiased`}>
         <GoogleTagManager gtmId="GTM-PHKX86ZB" />
         <Suspense fallback={null}>{children}</Suspense>
         <Analytics />

@@ -4,8 +4,6 @@ import { useState } from "react"
 import { Navigation } from "@/components/navigation"
 import { Footer } from "@/components/footer"
 import { Dialog, DialogContent } from "@/components/ui/dialog"
-import { Button } from "@/components/ui/button"
-import { ZoomIn } from "lucide-react"
 
 const galleryImages = [
   {
@@ -50,56 +48,65 @@ export default function GalleryPage() {
   const [filter, setFilter] = useState<"All" | "Exterior" | "Interior">("All")
 
   const filteredImages = filter === "All" ? galleryImages : galleryImages.filter((img) => img.category === filter)
+  const filters = ["All", "Exterior", "Interior"] as const
 
   return (
     <main>
       <Navigation />
       <div className="pt-20">
         {/* Hero Section */}
-        <section className="bg-gradient-to-r from-burgundy to-navy text-white py-16">
-          <div className="container mx-auto px-4">
-            <h1 className="font-serif text-4xl md:text-6xl font-bold mb-4">Gallery</h1>
-            <p className="text-xl text-white/90 max-w-2xl">
+        <section
+          className="relative min-h-[50vh] flex items-end overflow-hidden"
+          style={{ backgroundImage: "url('/gallery/exterior-1.png')", backgroundSize: "cover", backgroundPosition: "center" }}
+        >
+          <div className="absolute inset-0 bg-gradient-to-b from-black/15 to-black/50" />
+          <div className="relative z-10 container mx-auto px-5 pb-12 max-w-6xl">
+            <h1 className="font-serif text-white">Gallery</h1>
+            <p className="text-base text-white/85 max-w-xl mt-3">
               Explore our stunning collection of custom homes and interior designs.
             </p>
           </div>
         </section>
 
-        {/* Filter Buttons */}
-        <section className="py-8 bg-white border-b">
-          <div className="container mx-auto px-4">
-            <div className="flex justify-center gap-4">
-              {["All", "Exterior", "Interior"].map((category) => (
-                <Button
+        {/* Filter */}
+        <section className="py-6" style={{ backgroundColor: "var(--color-bg)", borderBottom: "1px solid var(--color-border)" }}>
+          <div className="container mx-auto px-5 max-w-6xl">
+            <div className="flex justify-center gap-6">
+              {filters.map((category) => (
+                <button
                   key={category}
-                  onClick={() => setFilter(category as "All" | "Exterior" | "Interior")}
-                  variant={filter === category ? "default" : "outline"}
-                  className={filter === category ? "bg-burgundy hover:bg-burgundy/90" : ""}
+                  onClick={() => setFilter(category)}
+                  className="text-[13px] uppercase tracking-[0.05em] pb-1 transition-all duration-300"
+                  style={{
+                    color: filter === category ? "var(--color-primary)" : "var(--color-text-muted)",
+                    borderBottom: filter === category ? "2px solid var(--color-primary)" : "2px solid transparent",
+                  }}
                 >
                   {category}
-                </Button>
+                </button>
               ))}
             </div>
           </div>
         </section>
 
         {/* Gallery Grid */}
-        <section className="py-20 bg-gray-50">
-          <div className="container mx-auto px-4">
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
+        <section className="py-16 md:py-20" style={{ backgroundColor: "var(--color-bg-alt)" }}>
+          <div className="container mx-auto px-5 max-w-6xl">
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {filteredImages.map((image, index) => (
                 <div
                   key={index}
-                  className="group relative aspect-[4/3] overflow-hidden rounded-lg cursor-pointer bg-gray-200"
+                  className="group overflow-hidden cursor-pointer rounded-sm"
+                  style={{ border: "1px solid var(--color-border)" }}
                   onClick={() => setSelectedImage(index)}
                 >
-                  <img
-                    src={image.src || "/placeholder.svg"}
-                    alt={image.alt}
-                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
-                  />
-                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-colors duration-300 flex items-center justify-center">
-                    <ZoomIn className="h-12 w-12 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  <div className="overflow-hidden">
+                    <img
+                      src={image.src || "/placeholder.svg"}
+                      alt={image.alt}
+                      className="w-full object-cover transition-transform duration-500 hover:scale-[1.02]"
+                      style={{ aspectRatio: "4/3" }}
+                    />
                   </div>
                 </div>
               ))}
@@ -109,7 +116,6 @@ export default function GalleryPage() {
       </div>
       <Footer />
 
-      {/* Lightbox Dialog */}
       <Dialog open={selectedImage !== null} onOpenChange={() => setSelectedImage(null)}>
         <DialogContent className="max-w-7xl w-full p-0 bg-black/95">
           <div className="relative w-full h-[90vh] flex items-center justify-center">
