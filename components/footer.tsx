@@ -6,7 +6,7 @@ import Link from 'next/link';
 
 export function Footer() {
 	return (
-		<footer style={{ backgroundColor: '#354430' }}>
+		<footer style={{ background: 'linear-gradient(180deg, #1e4b8b 0%, #153568 100%)', borderTop: '3px solid #d4af37' }}>
 			<div className='container mx-auto px-5 py-12 max-w-6xl'>
 				<div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8'>
 					{/* Company Info */}

@@ -59,10 +59,19 @@ const models: Model[] = [
 
 export function FeaturedModels() {
   return (
-    <section className="py-16 md:py-20" style={{ backgroundColor: "var(--color-bg-alt)" }}>
+    <section
+      className="py-16 md:py-20"
+      style={{
+        background: "linear-gradient(180deg, var(--color-bg-alt) 0%, var(--color-bg) 100%)",
+        borderTop: "1px solid var(--color-border)",
+      }}
+    >
       <div className="container mx-auto px-5 max-w-6xl">
         <div className="mb-3">
-          <h2 className="font-serif" style={{ color: "var(--color-text)" }}>Featured Home Models</h2>
+          <p className="text-[11px] uppercase tracking-[0.15em] mb-2" style={{ color: "#d4af37" }}>
+            Our Collection
+          </p>
+          <h2 className="font-serif" style={{ color: "#1e4b8b" }}>Featured Home Models</h2>
         </div>
         <p className="text-base mb-10" style={{ color: "var(--color-text-muted)" }}>
           Explore our most popular floor plans, each designed with luxury and functionality in mind.
@@ -72,8 +81,12 @@ export function FeaturedModels() {
           {models.map((model, index) => (
             <div
               key={index}
-              className="rounded-sm overflow-hidden"
-              style={{ border: "1px solid var(--color-border)", backgroundColor: "var(--color-bg)" }}
+              className="rounded-md overflow-hidden transition-shadow duration-300 hover:shadow-xl"
+              style={{
+                border: "1px solid var(--color-border)",
+                backgroundColor: "#ffffff",
+                boxShadow: "0 2px 8px rgba(0,0,0,0.06)",
+              }}
             >
               <div className="overflow-hidden">
                 <img
@@ -83,17 +96,17 @@ export function FeaturedModels() {
                   style={{ aspectRatio: "4/3" }}
                 />
               </div>
-              <div className="p-6">
+              <div
+                className="p-6"
+                style={{ borderTop: "3px solid #7d1935" }}
+              >
                 {model.available && (
-                  <p
-                    className="text-[11px] tracking-[0.1em] uppercase mb-2"
-                    style={{ color: "var(--color-accent)" }}
-                  >
+                  <p className="text-[11px] tracking-[0.1em] uppercase mb-2" style={{ color: "#d4af37" }}>
                     Available Now
                   </p>
                 )}
-                <h3 className="font-serif mb-1" style={{ color: "var(--color-text)" }}>{model.name}</h3>
-                <p className="text-base mb-3" style={{ color: "var(--color-text)" }}>
+                <h3 className="font-serif mb-1" style={{ color: "#1e4b8b" }}>{model.name}</h3>
+                <p className="text-base font-normal mb-3" style={{ color: "#7d1935" }}>
                   Starting at {model.price}
                 </p>
                 <p className="text-[13px] font-light mb-4" style={{ color: "var(--color-text-muted)" }}>
@@ -102,7 +115,7 @@ export function FeaturedModels() {
                 <Link
                   href="/models"
                   className="text-[13px] tracking-[0.05em] uppercase underline underline-offset-4 transition-colors duration-300"
-                  style={{ color: "var(--color-primary)" }}
+                  style={{ color: "#7d1935" }}
                 >
                   View Details
                 </Link>

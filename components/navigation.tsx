@@ -45,8 +45,9 @@ export function Navigation() {
 					: 'bg-gradient-to-b from-black/50 to-transparent'
 			}`}
 			style={isScrolled ? {
-				backgroundColor: 'rgba(250, 248, 245, 0.95)',
-				borderBottom: '1px solid var(--color-border)',
+				backgroundColor: 'rgba(255, 255, 255, 0.97)',
+				borderBottom: '2px solid #7d1935',
+				boxShadow: '0 2px 12px rgba(0,0,0,0.08)',
 			} : undefined}
 		>
 			<div className='container mx-auto px-5'>
@@ -95,8 +96,9 @@ export function Navigation() {
 							className='text-[12px] font-normal uppercase tracking-[0.08em] rounded-sm transition-all duration-300'
 							style={{
 								padding: '8px 20px',
-								border: isScrolled ? '1px solid var(--color-primary)' : '1px solid rgba(255,255,255,0.7)',
-								color: isScrolled ? 'var(--color-primary)' : 'rgba(255,255,255,0.9)',
+								border: isScrolled ? '2px solid #7d1935' : '2px solid rgba(255,255,255,0.7)',
+								color: isScrolled ? '#7d1935' : 'rgba(255,255,255,0.9)',
+								borderRadius: '4px',
 							}}
 						>
 							Schedule Tour

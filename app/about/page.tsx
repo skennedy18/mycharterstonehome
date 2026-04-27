@@ -56,7 +56,7 @@ export default function AboutPage() {
           <div className="container mx-auto px-5 max-w-6xl">
             <div className="grid md:grid-cols-5 gap-10 items-start">
               <div className="md:col-span-3">
-                <h2 className="font-serif mb-3" style={{ color: "var(--color-text)" }}>Our Story</h2>
+                <h2 className="font-serif mb-3" style={{ color: "#1e4b8b" }}>Our Story</h2>
                 <p className="text-base leading-relaxed" style={{ color: "var(--color-text-muted)" }}>
                   Charterstone Homes was founded with a simple mission: to build exceptional custom homes that reflect the
                   unique lifestyle and dreams of each homeowner. Over the years, we&rsquo;ve become the preferred builder in
@@ -68,7 +68,7 @@ export default function AboutPage() {
                   src="/elevations/bluebird-elevation-b-rendered.jpg"
                   alt="Charterstone home"
                   className="w-full object-cover rounded-sm"
-                  style={{ aspectRatio: "3/2", border: "1px solid var(--color-border)" }}
+                  style={{ aspectRatio: "3/2", border: "2px solid var(--color-border)", boxShadow: "0 4px 16px rgba(0,0,0,0.1)" }}
                 />
               </div>
             </div>
@@ -78,7 +78,7 @@ export default function AboutPage() {
         {/* Team */}
         <section className="py-16 md:py-20" style={{ backgroundColor: "var(--color-bg-alt)" }}>
           <div className="container mx-auto px-5 max-w-6xl">
-            <h2 className="font-serif mb-10" style={{ color: "var(--color-text)" }}>Meet Our Team</h2>
+            <h2 className="font-serif mb-10" style={{ color: "#1e4b8b" }}>Meet Our Team</h2>
             <div className="max-w-3xl">
               {team.map((member, index) => (
                 <div key={index} className="flex flex-col md:flex-row gap-8 items-start">
@@ -91,8 +91,8 @@ export default function AboutPage() {
                     />
                   </div>
                   <div>
-                    <h3 className="font-serif mb-1" style={{ color: "var(--color-text)" }}>{member.name}</h3>
-                    <p className="text-sm uppercase tracking-[0.08em] mb-3" style={{ color: "var(--color-accent)" }}>
+                    <h3 className="font-serif mb-1" style={{ color: "#1e4b8b" }}>{member.name}</h3>
+                    <p className="text-sm uppercase tracking-[0.08em] mb-3" style={{ color: "#d4af37" }}>
                       {member.role}
                     </p>
                     <p className="text-sm leading-relaxed" style={{ color: "var(--color-text-muted)" }}>{member.bio}</p>
@@ -104,7 +104,7 @@ export default function AboutPage() {
         </section>
 
         {/* Testimonials */}
-        <section className="py-16 md:py-20" style={{ backgroundColor: "var(--color-primary-dark)", color: "rgba(255,255,255,0.9)" }}>
+        <section className="py-16 md:py-20" style={{ background: "linear-gradient(135deg, #1e4b8b 0%, #153568 100%)", color: "rgba(255,255,255,0.9)" }}>
           <div className="container mx-auto px-5 max-w-6xl">
             <h2 className="font-serif mb-10 text-white">What Our Clients Say</h2>
             <div className="space-y-10 max-w-3xl">
