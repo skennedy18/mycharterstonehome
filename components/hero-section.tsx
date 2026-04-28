@@ -16,20 +16,42 @@ export function HeroSection() {
 
       {/* Content */}
       <div className="relative z-10 text-center px-5 max-w-4xl mx-auto">
-        <p className="text-base uppercase tracking-[0.2em] text-white font-medium mb-4" style={{ textShadow: "0 2px 8px rgba(0,0,0,0.5)" }}>
-          Welcome to Charterstone Homes
+        <p className="text-sm uppercase tracking-[0.25em] text-white/80 font-light mb-8" style={{ textShadow: "0 2px 8px rgba(0,0,0,0.5)" }}>
+          Charterstone Homes
         </p>
-        <h1 className="font-serif text-white mb-4 leading-[1.15]" style={{ fontWeight: 400 }}>
-          Your Dream Home Awaits in Pecan Plantation
+        <h1 className="font-serif text-white mb-6 leading-[1.1]" style={{ fontWeight: 400, textShadow: "0 2px 12px rgba(0,0,0,0.4)" }}>
+          Build Your Dream Home<br />in Pecan Plantation
         </h1>
-        <p className="text-xl text-white font-normal mb-8 max-w-2xl mx-auto" style={{ textShadow: "0 2px 8px rgba(0,0,0,0.5)" }}>
-          Luxury Custom Homes in Texas&rsquo;s Premier Golf &amp; Aviation Community
+        <p className="text-lg text-white/85 font-light mb-12 max-w-lg mx-auto tracking-wide" style={{ textShadow: "0 2px 8px rgba(0,0,0,0.5)" }}>
+          Texas&rsquo;s Premier Golf &amp; Aviation Community
         </p>
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Link href="/models" className="btn-primary">
+        <div className="flex flex-col sm:flex-row gap-5 justify-center">
+          <Link
+            href="/models"
+            className="text-[13px] font-medium uppercase tracking-[0.1em] transition-all duration-300"
+            style={{
+              padding: "14px 36px",
+              backgroundColor: "#7d1935",
+              color: "white",
+              borderRadius: "999px",
+              boxShadow: "0 4px 20px rgba(125,25,53,0.4), 0 2px 8px rgba(0,0,0,0.2)",
+            }}
+          >
             Explore Floor Plans
           </Link>
-          <Link href="/contact" className="btn-secondary-light">
+          <Link
+            href="/contact"
+            className="text-[13px] font-medium uppercase tracking-[0.1em] transition-all duration-300"
+            style={{
+              padding: "14px 36px",
+              border: "2px solid rgba(255,255,255,0.6)",
+              color: "white",
+              borderRadius: "999px",
+              backdropFilter: "blur(4px)",
+              backgroundColor: "rgba(255,255,255,0.08)",
+              boxShadow: "0 4px 16px rgba(0,0,0,0.15)",
+            }}
+          >
             Schedule a Tour
           </Link>
         </div>
