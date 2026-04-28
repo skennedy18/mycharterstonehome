@@ -14,7 +14,11 @@ export default function ContactPage() {
 		email: '',
 		phone: '',
 		interest: '',
-		message: ''
+		message: '',
+		isRealtor: false,
+		realtorName: '',
+		brokerage: '',
+		clientName: '',
 	});
 	const [isSubmitted, setIsSubmitted] = useState(false);
 	const [isSubmitting, setIsSubmitting] = useState(false);
@@ -43,7 +47,11 @@ export default function ContactPage() {
 				email: '',
 				phone: '',
 				interest: '',
-				message: ''
+				message: '',
+				isRealtor: false,
+				realtorName: '',
+				brokerage: '',
+				clientName: '',
 			});
 		} catch {
 			setError('Failed to send message. Please try again or call us directly.');
@@ -53,7 +61,8 @@ export default function ContactPage() {
 	};
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-		setFormData({ ...formData, [e.target.name]: e.target.value });
+		const { name, value, type } = e.target;
+		setFormData({ ...formData, [name]: type === 'checkbox' ? (e.target as HTMLInputElement).checked : value });
 	};
 
 	const isOpen = () => {
@@ -79,13 +88,13 @@ export default function ContactPage() {
 	return (
 		<main>
 			<Navigation />
-			<div className='pt-20'>
+			<div>
 				{/* Hero Section */}
 				<section
-					className='relative min-h-[50vh] flex items-end overflow-hidden'
+					className='relative min-h-[60vh] flex items-end overflow-hidden'
 					style={{ backgroundImage: "url('/aerial-view-of-golf-course-at-sunrise.jpg')", backgroundSize: 'cover', backgroundPosition: 'center' }}
 				>
-					<div className='absolute inset-0 bg-gradient-to-b from-black/15 to-black/50' />
+					<div className='absolute inset-0 bg-gradient-to-b from-black/30 to-black/60' />
 					<div className='relative z-10 container mx-auto px-5 pb-12 max-w-6xl'>
 						<h1 className='font-serif text-white'>Contact Us</h1>
 						<p className='text-base text-white/85 max-w-xl mt-3'>
@@ -174,24 +183,24 @@ export default function ContactPage() {
 									<form onSubmit={handleSubmit} className='space-y-6'>
 										<div className='grid md:grid-cols-2 gap-6'>
 											<div>
-												<label htmlFor='firstName' className='block text-[12px] uppercase tracking-[0.08em] mb-2' style={{ color: 'var(--color-text-muted)' }}>First Name *</label>
+												<label htmlFor='firstName' className='block text-[12px] uppercase tracking-[0.08em] mb-2' style={{ color: 'var(--color-text-muted)' }}>First Name {!formData.isRealtor && '*'}</label>
 												<input
 													type='text'
 													id='firstName'
 													name='firstName'
-													required
+													required={!formData.isRealtor}
 													value={formData.firstName}
 													onChange={handleChange}
 													style={inputStyle}
 												/>
 											</div>
 											<div>
-												<label htmlFor='lastName' className='block text-[12px] uppercase tracking-[0.08em] mb-2' style={{ color: 'var(--color-text-muted)' }}>Last Name *</label>
+												<label htmlFor='lastName' className='block text-[12px] uppercase tracking-[0.08em] mb-2' style={{ color: 'var(--color-text-muted)' }}>Last Name {!formData.isRealtor && '*'}</label>
 												<input
 													type='text'
 													id='lastName'
 													name='lastName'
-													required
+													required={!formData.isRealtor}
 													value={formData.lastName}
 													onChange={handleChange}
 													style={inputStyle}
@@ -223,8 +232,72 @@ export default function ContactPage() {
 												/>
 											</div>
 										</div>
-										<div>
-											<label htmlFor='interest' className='block text-[12px] uppercase tracking-[0.08em] mb-2' style={{ color: 'var(--color-text-muted)' }}>I&apos;m Interested In</label>
+										{/* Realtor Toggle */}
+									<div
+										className='rounded-md p-5'
+										style={{
+											backgroundColor: 'var(--color-bg-alt)',
+											border: '1px solid var(--color-border)',
+										}}
+									>
+										<label htmlFor='isRealtor' className='flex items-center gap-3 cursor-pointer'>
+											<input
+												type='checkbox'
+												id='isRealtor'
+												name='isRealtor'
+												checked={formData.isRealtor}
+												onChange={handleChange}
+												className='h-4 w-4 accent-[#7d1935]'
+											/>
+											<span className='text-sm font-normal' style={{ color: 'var(--color-text)' }}>
+												I am a realtor inquiring on behalf of a client
+											</span>
+										</label>
+										{formData.isRealtor && (
+											<div className='mt-5 space-y-4 pt-4' style={{ borderTop: '1px solid var(--color-border)' }}>
+												<div className='grid md:grid-cols-2 gap-6'>
+													<div>
+														<label htmlFor='realtorName' className='block text-[12px] uppercase tracking-[0.08em] mb-2' style={{ color: 'var(--color-text-muted)' }}>Realtor Name *</label>
+														<input
+															type='text'
+															id='realtorName'
+															name='realtorName'
+															required={formData.isRealtor}
+															value={formData.realtorName}
+															onChange={handleChange}
+															style={{ ...inputStyle, borderBottom: '1px solid var(--color-border)' }}
+														/>
+													</div>
+													<div>
+														<label htmlFor='brokerage' className='block text-[12px] uppercase tracking-[0.08em] mb-2' style={{ color: 'var(--color-text-muted)' }}>Brokerage</label>
+														<input
+															type='text'
+															id='brokerage'
+															name='brokerage'
+															value={formData.brokerage}
+															onChange={handleChange}
+															style={{ ...inputStyle, borderBottom: '1px solid var(--color-border)' }}
+														/>
+													</div>
+												</div>
+												<div>
+													<label htmlFor='clientName' className='block text-[12px] uppercase tracking-[0.08em] mb-2' style={{ color: 'var(--color-text-muted)' }}>Client Name *</label>
+													<input
+														type='text'
+														id='clientName'
+														name='clientName'
+														required={formData.isRealtor}
+														value={formData.clientName}
+														onChange={handleChange}
+														style={{ ...inputStyle, borderBottom: '1px solid var(--color-border)' }}
+													/>
+												</div>
+											</div>
+										)}
+									</div>
+
+									<div>
+										<label htmlFor='interest' className='block text-[12px] uppercase tracking-[0.08em] mb-2' style={{ color: 'var(--color-text-muted)' }}>I&apos;m Interested In</label>
 											<input
 												type='text'
 												id='interest'

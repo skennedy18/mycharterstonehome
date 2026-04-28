@@ -10,13 +10,13 @@ export default function AvailablePlotsPage() {
 	return (
 		<main>
 			<Navigation />
-			<div className='pt-20'>
+			<div>
 				{/* Hero Section */}
 				<section
-					className='relative min-h-[50vh] flex items-end overflow-hidden'
+					className='relative min-h-[60vh] flex items-end overflow-hidden'
 					style={{ backgroundImage: "url('/aerial-view-of-golf-course-at-sunrise.jpg')", backgroundSize: 'cover', backgroundPosition: 'center' }}
 				>
-					<div className='absolute inset-0 bg-gradient-to-b from-black/15 to-black/50' />
+					<div className='absolute inset-0 bg-gradient-to-b from-black/30 to-black/60' />
 					<div className='relative z-10 container mx-auto px-5 pb-12 max-w-6xl'>
 						<h1 className='font-serif text-white'>Available Homesites</h1>
 						<p className='text-base text-white/85 max-w-xl mt-3'>

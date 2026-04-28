@@ -69,9 +69,10 @@ export function Navigation() {
 							<Link
 								key={link.href}
 								href={link.href}
-								className='text-[13px] font-light uppercase tracking-[0.05em] transition-colors duration-300'
+								className='text-[13px] font-medium uppercase tracking-[0.05em] transition-colors duration-300'
 								style={{
-									color: isScrolled ? 'var(--color-text-muted)' : 'rgba(255,255,255,0.85)',
+									color: isScrolled ? 'var(--color-text)' : 'rgba(255,255,255,0.95)',
+									textShadow: isScrolled ? 'none' : '0 1px 4px rgba(0,0,0,0.5)',
 								}}
 							>
 								{link.label}
