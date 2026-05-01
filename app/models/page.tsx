@@ -18,6 +18,7 @@ interface InteriorImage {
 interface Model {
 	id: number;
 	name: string;
+	address: string;
 	image: string;
 	beds: number;
 	baths: number;
@@ -34,13 +35,50 @@ interface Model {
 const allModels: Model[] = [
 	{
 		id: 1,
+		name: 'The Cardinal',
+		address: '2180 Middlewood Cir',
+		image: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/2180%20Middlewood%20Cir_Cardinal.png-6jlcNpFIPksnSKEB9HTFz9J3EJXKNE.jpeg',
+		beds: 4,
+		baths: 3,
+		sqft: 2910,
+		garage: 3,
+		price: 651840,
+		lotType: 'golf',
+		available: true,
+		floorPlans: [{ name: 'Main Floor Plan', image: '/floor-plans/cardinal-plan.png', type: 'Main Level' }],
+		elevations: ['https://hebbkx1anhila5yf.public.blob.vercel-storage.com/2180%20Middlewood%20Cir_Cardinal.png-6jlcNpFIPksnSKEB9HTFz9J3EJXKNE.jpeg'],
+		interiorImages: [
+			{ url: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/2119-1%20%281%29.png-13nBNWH2n3kk55QJeXaPZTp58glHsZ.jpeg', caption: 'Open Concept Living & Kitchen' },
+			{ url: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/2180-2.png-upNlsjkkuPZr9OxyhAzTOkTDtd98zo.jpeg', caption: 'Formal Dining Room' },
+			{ url: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/2180-3.png-N0Wn4QDJ1smWwQeq4tjTG7PheXppHR.jpeg', caption: 'Master Bedroom' },
+			{ url: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/2180-4.png-JPvjXr8hVA4t8gdLs893OgpBCKgR77.jpeg', caption: 'Master Bathroom' }
+		]
+	},
+	{
+		id: 2,
+		name: 'The Magpie',
+		address: '2188 Middlewood Cir',
+		image: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/2188%20Middlewood%20Cir_Magpie.png-zx0jiaz0NEJV7JnQ2TZ3peNKjASDP3.jpeg',
+		beds: 4,
+		baths: 3,
+		sqft: 3003,
+		garage: 3,
+		price: 672672,
+		lotType: 'golf',
+		available: true,
+		floorPlans: [{ name: 'Main Floor Plan', image: '/floor-plans/magpie-plan.png', type: 'Main Level' }],
+		elevations: ['https://hebbkx1anhila5yf.public.blob.vercel-storage.com/2188%20Middlewood%20Cir_Magpie.png-zx0jiaz0NEJV7JnQ2TZ3peNKjASDP3.jpeg']
+	},
+	{
+		id: 3,
 		name: 'The Martin',
+		address: '2184 Middlewood Cir',
 		image: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/2184%20Middlewood%20Cir_Martin.png-1yw8K0L1IGkkbrPbYJnRv3jL6kuTrv.jpeg',
 		beds: 4,
 		baths: 3,
 		sqft: 3000,
 		garage: 3,
-		price: 490000,
+		price: 672000,
 		lotType: 'golf',
 		available: true,
 		floorPlans: [{ name: 'Main Floor Plan', image: '/floor-plans/martin-plan.png', type: 'Main Level' }],
@@ -53,51 +91,24 @@ const allModels: Model[] = [
 		]
 	},
 	{
-		id: 2,
-		name: 'The Bluebird',
-		image: '/elevations/bluebird-elevation-b-rendered.jpg',
-		beds: 4,
-		baths: 3,
-		sqft: 2659,
-		garage: 3,
-		price: 470000,
-		lotType: 'standard',
-		available: true,
-		floorPlans: [{ name: 'Main Floor Plan', image: '/floor-plans/bluebird-plan.png', type: 'Main Level' }],
-		elevations: ['/elevations/bluebird-elevation-b.png']
-	},
-	{
-		id: 3,
-		name: 'The Magpie',
-		image: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/2188%20Middlewood%20Cir_Magpie.png-zx0jiaz0NEJV7JnQ2TZ3peNKjASDP3.jpeg',
+		id: 4,
+		name: 'The Martin',
+		address: '2119 Middlewood Cir',
+		image: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/2184%20Middlewood%20Cir_Martin.png-1yw8K0L1IGkkbrPbYJnRv3jL6kuTrv.jpeg',
 		beds: 4,
 		baths: 3,
 		sqft: 3000,
 		garage: 3,
-		price: 490000,
+		price: 672000,
 		lotType: 'golf',
 		available: true,
-		floorPlans: [{ name: 'Main Floor Plan', image: '/floor-plans/magpie-plan.png', type: 'Main Level' }],
-		elevations: ['https://hebbkx1anhila5yf.public.blob.vercel-storage.com/2188%20Middlewood%20Cir_Magpie.png-zx0jiaz0NEJV7JnQ2TZ3peNKjASDP3.jpeg']
-	},
-	{
-		id: 4,
-		name: 'The Cardinal',
-		image: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/2180%20Middlewood%20Cir_Cardinal.png-6jlcNpFIPksnSKEB9HTFz9J3EJXKNE.jpeg',
-		beds: 4,
-		baths: 3.5,
-		sqft: 2905,
-		garage: 3,
-		price: 490000,
-		lotType: 'golf',
-		available: true,
-		floorPlans: [{ name: 'Main Floor Plan', image: '/floor-plans/cardinal-plan.png', type: 'Main Level' }],
-		elevations: ['https://hebbkx1anhila5yf.public.blob.vercel-storage.com/2180%20Middlewood%20Cir_Cardinal.png-6jlcNpFIPksnSKEB9HTFz9J3EJXKNE.jpeg'],
+		floorPlans: [{ name: 'Main Floor Plan', image: '/floor-plans/martin-plan.png', type: 'Main Level' }],
+		elevations: ['https://hebbkx1anhila5yf.public.blob.vercel-storage.com/2184%20Middlewood%20Cir_Martin.png-1yw8K0L1IGkkbrPbYJnRv3jL6kuTrv.jpeg'],
 		interiorImages: [
-			{ url: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/2119-1%20%281%29.png-13nBNWH2n3kk55QJeXaPZTp58glHsZ.jpeg', caption: 'Open Concept Living & Kitchen' },
-			{ url: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/2180-2.png-upNlsjkkuPZr9OxyhAzTOkTDtd98zo.jpeg', caption: 'Formal Dining Room' },
-			{ url: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/2180-3.png-N0Wn4QDJ1smWwQeq4tjTG7PheXppHR.jpeg', caption: 'Master Bedroom' },
-			{ url: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/2180-4.png-JPvjXr8hVA4t8gdLs893OgpBCKgR77.jpeg', caption: 'Master Bathroom' }
+			{ url: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/2180-1%20%281%29.png-ggKbNmCl6A7a0EGXyN4nJ3pyzBMvM7.jpeg', caption: 'Open Concept Living & Kitchen' },
+			{ url: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/2119-2.png-NWu5qpwd2LyV9qkskiXIBCWLWutRoh.jpeg', caption: 'Dining Area' },
+			{ url: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/2119-3.png-Krtr5QWsNVV1CJ5k7SD1RUcSNnwxoa.jpeg', caption: 'Master Bedroom' },
+			{ url: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/2119-4.png-1p6dW2aVb8c2Y3J58ryFUfsCM6azJx.jpeg', caption: 'Master Bathroom' }
 		]
 	}
 ];
@@ -147,7 +158,7 @@ export default function ModelsPage() {
 				{/* Hero Section */}
 				<section
 					className='relative min-h-[60vh] flex items-end overflow-hidden'
-					style={{ backgroundImage: "url('/elevations/bluebird-elevation-b-rendered.jpg')", backgroundSize: 'cover', backgroundPosition: 'center' }}
+					style={{ backgroundImage: "url('https://hebbkx1anhila5yf.public.blob.vercel-storage.com/2180%20Middlewood%20Cir_Cardinal.png-6jlcNpFIPksnSKEB9HTFz9J3EJXKNE.jpeg')", backgroundSize: 'cover', backgroundPosition: 'center' }}
 				>
 					<div className='absolute inset-0 bg-gradient-to-b from-black/30 to-black/60' />
 					<div className='relative z-10 container mx-auto px-5 pb-12 max-w-6xl'>
@@ -209,6 +220,9 @@ export default function ModelsPage() {
 												</div>
 												<div className='p-6'>
 													<h3 className='font-serif mb-1' style={{ color: 'var(--color-text)' }}>{model.name}</h3>
+													<p className='text-[13px] font-light mb-2' style={{ color: 'var(--color-text-muted)' }}>
+														{model.address}
+													</p>
 													<p className='text-base mb-3' style={{ color: 'var(--color-text)' }}>
 														Starting at ${model.price.toLocaleString()}
 													</p>

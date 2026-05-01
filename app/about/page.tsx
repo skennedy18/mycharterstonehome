@@ -45,7 +45,7 @@ export default function AboutPage() {
               </div>
               <div className="md:col-span-2">
                 <img
-                  src="/elevations/bluebird-elevation-b-rendered.jpg"
+                  src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/2180%20Middlewood%20Cir_Cardinal.png-6jlcNpFIPksnSKEB9HTFz9J3EJXKNE.jpeg"
                   alt="Charterstone home"
                   className="w-full object-cover rounded-sm"
                   style={{ aspectRatio: "3/2", border: "2px solid var(--color-border)", boxShadow: "0 4px 16px rgba(0,0,0,0.1)" }}

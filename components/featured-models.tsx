@@ -2,9 +2,10 @@ import Link from "next/link"
 
 interface Model {
   name: string
+  address: string
   image: string
   beds: number
-  baths: number | string
+  baths: number
   sqft: string
   garage: number
   price: string
@@ -13,46 +14,39 @@ interface Model {
 
 const models: Model[] = [
   {
-    name: "The Bluebird",
-    image: "/elevations/bluebird-elevation-b-rendered.jpg",
+    name: "The Cardinal",
+    address: "2180 Middlewood Cir",
+    image:
+      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/2180%20Middlewood%20Cir_Cardinal.png-6jlcNpFIPksnSKEB9HTFz9J3EJXKNE.jpeg",
     beds: 4,
     baths: 3,
-    sqft: "2,659",
+    sqft: "2,910",
     garage: 3,
-    price: "$470,000",
+    price: "$651,840",
     available: true,
   },
   {
     name: "The Magpie",
+    address: "2188 Middlewood Cir",
     image:
-      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/2180%20Middlewood%20Cir_Cardinal.png-6jlcNpFIPksnSKEB9HTFz9J3EJXKNE.jpeg",
+      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/2188%20Middlewood%20Cir_Magpie.png-zx0jiaz0NEJV7JnQ2TZ3peNKjASDP3.jpeg",
     beds: 4,
     baths: 3,
-    sqft: "3,000",
+    sqft: "3,003",
     garage: 3,
-    price: "$490,000",
-    available: true,
-  },
-  {
-    name: "The Cardinal",
-    image:
-      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/2180%20Middlewood%20Cir_Cardinal.png-6jlcNpFIPksnSKEB9HTFz9J3EJXKNE.jpeg",
-    beds: 4,
-    baths: "3.5",
-    sqft: "2,905",
-    garage: 3,
-    price: "$490,000",
+    price: "$672,672",
     available: true,
   },
   {
     name: "The Martin",
+    address: "2184 Middlewood Cir",
     image:
       "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/2184%20Middlewood%20Cir_Martin.png-1yw8K0L1IGkkbrPbYJnRv3jL6kuTrv.jpeg",
     beds: 4,
     baths: 3,
     sqft: "3,000",
     garage: 3,
-    price: "$490,000",
+    price: "$672,000",
     available: true,
   },
 ]
@@ -106,6 +100,9 @@ export function FeaturedModels() {
                   </p>
                 )}
                 <h3 className="font-serif mb-1" style={{ color: "#1e4b8b" }}>{model.name}</h3>
+                <p className="text-[13px] font-light mb-2" style={{ color: "var(--color-text-muted)" }}>
+                  {model.address}
+                </p>
                 <p className="text-base font-normal mb-3" style={{ color: "#7d1935" }}>
                   Starting at {model.price}
                 </p>
