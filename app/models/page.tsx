@@ -219,10 +219,10 @@ export default function ModelsPage() {
 													)}
 												</div>
 												<div className='p-6'>
-													<h3 className='font-serif mb-1' style={{ color: 'var(--color-text)' }}>{model.name}</h3>
-													<p className='text-[13px] font-light mb-2' style={{ color: 'var(--color-text-muted)' }}>
+													<p className='text-[13px] font-light mb-1' style={{ color: 'var(--color-text-muted)' }}>
 														{model.address}
 													</p>
+													<h3 className='font-serif mb-1' style={{ color: 'var(--color-text)' }}>{model.name}</h3>
 													<p className='text-base mb-3' style={{ color: 'var(--color-text)' }}>
 														Starting at ${model.price.toLocaleString()}
 													</p>
