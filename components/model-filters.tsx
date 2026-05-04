@@ -50,7 +50,7 @@ export function ModelFilters({
           Price: ${priceRange[0].toLocaleString()} – ${priceRange[1].toLocaleString()}
         </Label>
         <Slider
-          min={400000}
+          min={600000}
           max={1000000}
           step={25000}
           value={priceRange}

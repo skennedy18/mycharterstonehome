@@ -114,7 +114,7 @@ const allModels: Model[] = [
 ];
 
 export default function ModelsPage() {
-	const [priceRange, setPriceRange] = useState([400000, 600000]);
+	const [priceRange, setPriceRange] = useState([600000, 800000]);
 	const [sqftRange, setSqftRange] = useState([2000, 4000]);
 	const [bedrooms, setBedrooms] = useState('any');
 	const [lotType, setLotType] = useState('any');
@@ -123,7 +123,7 @@ export default function ModelsPage() {
 	const [expandedModel, setExpandedModel] = useState<number | null>(null);
 
 	const resetFilters = () => {
-		setPriceRange([400000, 600000]);
+		setPriceRange([600000, 800000]);
 		setSqftRange([2000, 4000]);
 		setBedrooms('any');
 		setLotType('any');
