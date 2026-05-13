@@ -26,13 +26,6 @@ export const metadata: Metadata = {
   keywords:
     "Pecan Plantation homes, new construction Granbury TX, golf course homes, luxury homes Texas, 55+ communities, aviation community homes, country club living, custom homes DFW, Charterstone Homes, lake homes Texas",
   generator: "v0.app",
-  icons: {
-    icon: [
-      { url: "/logo-transparent.png", type: "image/png" },
-    ],
-    shortcut: "/logo-transparent.png",
-    apple: "/logo-transparent.png",
-  },
   openGraph: {
     title: "Charterstone Homes | Luxury New Homes in Pecan Plantation, TX",
     description: "Build your dream home in Pecan Plantation's premier golf community.",
