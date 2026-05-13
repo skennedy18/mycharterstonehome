@@ -19,6 +19,7 @@ const outfit = Outfit({
 })
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://mycharterstonehome.com"),
   title: "Charterstone Homes | Luxury New Homes in Pecan Plantation, TX | Golf Course Community",
   description:
     "Build your dream home in Pecan Plantation's premier golf community. Charterstone Homes offers luxury custom homes perfect for retirees, aviation enthusiasts, and families. Tour our models today.",
@@ -27,16 +28,31 @@ export const metadata: Metadata = {
   generator: "v0.app",
   icons: {
     icon: [
-      { url: "/logo.svg", type: "image/svg+xml" },
-      { url: "/logo.png", type: "image/png" },
+      { url: "/logo-transparent.png", type: "image/png" },
     ],
-    shortcut: "/logo.png",
-    apple: "/logo.png",
+    shortcut: "/logo-transparent.png",
+    apple: "/logo-transparent.png",
   },
   openGraph: {
     title: "Charterstone Homes | Luxury New Homes in Pecan Plantation, TX",
     description: "Build your dream home in Pecan Plantation's premier golf community.",
     type: "website",
+    url: "https://mycharterstonehome.com",
+    siteName: "Charterstone Homes",
+    images: [
+      {
+        url: "/logo-transparent.png",
+        width: 1200,
+        height: 630,
+        alt: "Charterstone Homes",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Charterstone Homes | Luxury New Homes in Pecan Plantation, TX",
+    description: "Build your dream home in Pecan Plantation's premier golf community.",
+    images: ["/logo-transparent.png"],
   },
 }
 
