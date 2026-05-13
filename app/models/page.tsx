@@ -2,18 +2,11 @@
 
 import { FloorPlanViewer } from '@/components/floor-plan-viewer';
 import { Footer } from '@/components/footer';
-import { InteriorGallery } from '@/components/interior-gallery';
 import { ModelFilters } from '@/components/model-filters';
 import { MortgageCalculator } from '@/components/mortgage-calculator';
 import { Navigation } from '@/components/navigation';
-import { Download, Eye, ImageIcon } from 'lucide-react';
-import Link from 'next/link';
+import { Download, Eye } from 'lucide-react';
 import { useState } from 'react';
-
-interface InteriorImage {
-	url: string;
-	caption: string;
-}
 
 interface Model {
 	id: number;
@@ -29,7 +22,6 @@ interface Model {
 	available: boolean;
 	floorPlans: Array<{ name: string; image: string; type: string }>;
 	elevations: string[];
-	interiorImages?: InteriorImage[];
 }
 
 const allModels: Model[] = [
@@ -46,13 +38,7 @@ const allModels: Model[] = [
 		lotType: 'golf',
 		available: true,
 		floorPlans: [{ name: 'Main Floor Plan', image: '/floor-plans/cardinal-plan.png', type: 'Main Level' }],
-		elevations: ['https://hebbkx1anhila5yf.public.blob.vercel-storage.com/2180%20Middlewood%20Cir_Cardinal.png-6jlcNpFIPksnSKEB9HTFz9J3EJXKNE.jpeg'],
-		interiorImages: [
-			{ url: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/2119-1%20%281%29.png-13nBNWH2n3kk55QJeXaPZTp58glHsZ.jpeg', caption: 'Open Concept Living & Kitchen' },
-			{ url: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/2180-2.png-upNlsjkkuPZr9OxyhAzTOkTDtd98zo.jpeg', caption: 'Formal Dining Room' },
-			{ url: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/2180-3.png-N0Wn4QDJ1smWwQeq4tjTG7PheXppHR.jpeg', caption: 'Master Bedroom' },
-			{ url: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/2180-4.png-JPvjXr8hVA4t8gdLs893OgpBCKgR77.jpeg', caption: 'Master Bathroom' }
-		]
+		elevations: ['https://hebbkx1anhila5yf.public.blob.vercel-storage.com/2180%20Middlewood%20Cir_Cardinal.png-6jlcNpFIPksnSKEB9HTFz9J3EJXKNE.jpeg']
 	},
 	{
 		id: 2,
@@ -82,13 +68,7 @@ const allModels: Model[] = [
 		lotType: 'golf',
 		available: true,
 		floorPlans: [{ name: 'Main Floor Plan', image: '/floor-plans/martin-plan.png', type: 'Main Level' }],
-		elevations: ['https://hebbkx1anhila5yf.public.blob.vercel-storage.com/2184%20Middlewood%20Cir_Martin.png-1yw8K0L1IGkkbrPbYJnRv3jL6kuTrv.jpeg'],
-		interiorImages: [
-			{ url: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/2180-1%20%281%29.png-ggKbNmCl6A7a0EGXyN4nJ3pyzBMvM7.jpeg', caption: 'Open Concept Living & Kitchen' },
-			{ url: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/2119-2.png-NWu5qpwd2LyV9qkskiXIBCWLWutRoh.jpeg', caption: 'Dining Area' },
-			{ url: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/2119-3.png-Krtr5QWsNVV1CJ5k7SD1RUcSNnwxoa.jpeg', caption: 'Master Bedroom' },
-			{ url: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/2119-4.png-1p6dW2aVb8c2Y3J58ryFUfsCM6azJx.jpeg', caption: 'Master Bathroom' }
-		]
+		elevations: ['https://hebbkx1anhila5yf.public.blob.vercel-storage.com/2184%20Middlewood%20Cir_Martin.png-1yw8K0L1IGkkbrPbYJnRv3jL6kuTrv.jpeg']
 	},
 	{
 		id: 4,
@@ -103,13 +83,7 @@ const allModels: Model[] = [
 		lotType: 'golf',
 		available: true,
 		floorPlans: [{ name: 'Main Floor Plan', image: '/floor-plans/martin-plan.png', type: 'Main Level' }],
-		elevations: ['https://hebbkx1anhila5yf.public.blob.vercel-storage.com/2184%20Middlewood%20Cir_Martin.png-1yw8K0L1IGkkbrPbYJnRv3jL6kuTrv.jpeg'],
-		interiorImages: [
-			{ url: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/2180-1%20%281%29.png-ggKbNmCl6A7a0EGXyN4nJ3pyzBMvM7.jpeg', caption: 'Open Concept Living & Kitchen' },
-			{ url: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/2119-2.png-NWu5qpwd2LyV9qkskiXIBCWLWutRoh.jpeg', caption: 'Dining Area' },
-			{ url: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/2119-3.png-Krtr5QWsNVV1CJ5k7SD1RUcSNnwxoa.jpeg', caption: 'Master Bedroom' },
-			{ url: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/2119-4.png-1p6dW2aVb8c2Y3J58ryFUfsCM6azJx.jpeg', caption: 'Master Bathroom' }
-		]
+		elevations: ['https://hebbkx1anhila5yf.public.blob.vercel-storage.com/2184%20Middlewood%20Cir_Martin.png-1yw8K0L1IGkkbrPbYJnRv3jL6kuTrv.jpeg']
 	}
 ];
 
@@ -120,7 +94,6 @@ export default function ModelsPage() {
 	const [lotType, setLotType] = useState('any');
 	const [selectedModel, setSelectedModel] = useState<Model | null>(null);
 	const [viewerOpen, setViewerOpen] = useState(false);
-	const [expandedModel, setExpandedModel] = useState<number | null>(null);
 
 	const resetFilters = () => {
 		setPriceRange([600000, 800000]);
@@ -162,7 +135,7 @@ export default function ModelsPage() {
 				>
 					<div className='absolute inset-0 bg-gradient-to-b from-black/30 to-black/60' />
 					<div className='relative z-10 container mx-auto px-5 pb-12 max-w-6xl'>
-						<h1 className='font-serif text-white'>Floor Plans</h1>
+						<h1 className='font-serif text-white'>Available Homes</h1>
 						<p className='text-base text-white/85 max-w-xl mt-3'>
 							Discover the perfect floor plan for your lifestyle. Each home is thoughtfully designed with luxury and comfort in mind.
 						</p>
@@ -240,17 +213,6 @@ export default function ModelsPage() {
 																<Eye className='h-4 w-4' />
 																View Floor Plans
 															</button>
-															{model.interiorImages && model.interiorImages.length > 0 && (
-																<button
-																	className='btn-secondary flex items-center justify-center gap-2 text-[13px]'
-																	onClick={() => setExpandedModel(expandedModel === model.id ? null : model.id)}
-																	data-sttrack='View Interiors'
-																	data-stfloorplan={model.name}
-																>
-																	<ImageIcon className='h-4 w-4' />
-																	Interiors
-																</button>
-															)}
 														</div>
 														<button
 															className='text-[13px] tracking-[0.05em] uppercase underline underline-offset-4 text-left transition-colors duration-300 flex items-center gap-2 py-2'
@@ -265,15 +227,6 @@ export default function ModelsPage() {
 													</div>
 												</div>
 											</div>
-											{expandedModel === model.id && model.interiorImages && (
-												<div className='p-6' style={{ borderTop: '1px solid var(--color-border)', backgroundColor: 'var(--color-bg-alt)' }}>
-													<h3 className='font-serif mb-4' style={{ color: 'var(--color-text)' }}>Interior Renderings</h3>
-													<InteriorGallery
-														images={model.interiorImages}
-														modelName={model.name}
-													/>
-												</div>
-											)}
 										</div>
 									))}
 								</div>

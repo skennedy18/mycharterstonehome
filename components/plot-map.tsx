@@ -29,21 +29,21 @@ export function PlotMap() {
 	const [plots] = useState<Plot[]>([
 		{
 			id: 1,
-			available: false,
+			available: true,
 			lotNumber: '3589',
 			subdivision: '15A',
 			address: '2188 Middlewood Circle, Granbury, Texas - 76049'
 		},
 		{
 			id: 2,
-			available: false,
+			available: true,
 			lotNumber: '3590',
 			subdivision: '15A',
 			address: '2184 Middlewood Circle, Granbury, Texas - 76049'
 		},
 		{
 			id: 3,
-			available: false,
+			available: true,
 			lotNumber: '3591',
 			subdivision: '15A',
 			address: '2180 Middlewood Circle, Granbury, Texas - 76049'
@@ -333,10 +333,14 @@ This question was submitted from the Available Homesites page.
 					<h2 className='font-serif text-3xl font-bold text-navy mb-2'>Available Homesites</h2>
 					<p className='text-muted-foreground'>{availableCount} of 30 homesites available</p>
 				</div>
-				<div className='flex items-center gap-4'>
+				<div className='flex items-center gap-4 flex-wrap'>
 					<div className='flex items-center gap-2'>
 						<div className='w-4 h-4 bg-green-500 rounded-full' />
 						<span className='text-sm'>Available</span>
+					</div>
+					<div className='flex items-center gap-2'>
+						<div className='w-4 h-4 bg-blue-500 rounded-full' />
+						<span className='text-sm'>Designer</span>
 					</div>
 					<div className='flex items-center gap-2'>
 						<div className='w-4 h-4 bg-red-500 rounded-full' />
@@ -491,13 +495,13 @@ This question was submitted from the Available Homesites page.
 						<div className='flex gap-2 pt-4'>
 							<Button
 								className='flex-1 bg-burgundy hover:bg-burgundy/90'
-								data-stlabel='Call Us - (847) 757-5571'
+								data-stlabel='Call Us - (682) 498-3197'
 								data-stspec={`${selectedPlot?.address}`}
 								data-stcommunity={`Pecan Plantation - ${selectedPlot && plotPositions[selectedPlot.id]?.section === 'East Landings' ? 'East Landings' : 'Orchard'}`}
 								asChild>
 								<a
-									href='tel:+18477575571'
-									data-stlabel='Call Us - (847) 757-5571'>
+									href='tel:+16824983197'
+									data-stlabel='Call Us - (682) 498-3197'>
 									Call Us
 								</a>
 							</Button>
