@@ -91,10 +91,15 @@ export function LifestyleShowcase() {
         <div className="text-center mt-12">
           <Link
             href="/life-in-pecan"
-            className="inline-flex items-center gap-2 btn-primary group"
+            className="btn-primary group"
+            style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '12px' }}
           >
-            Explore More
-            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+            <span style={{ lineHeight: 1 }}>Discover Life in Pecan</span>
+            <ArrowRight
+              className="transition-transform duration-300 group-hover:translate-x-1"
+              style={{ height: '16px', width: '16px', flexShrink: 0 }}
+              strokeWidth={2}
+            />
           </Link>
         </div>
       </div>
