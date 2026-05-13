@@ -96,22 +96,28 @@ export function Navigation() {
 								</Link>
 								{link.children && openDropdown === link.href && (
 									<div
-										className='absolute top-full left-0 pt-3 min-w-[240px]'
+										className='absolute top-full left-0 pt-3 min-w-[220px]'
 									>
 										<div
-											className='rounded-sm py-2'
+											className='py-1 backdrop-blur-[10px]'
 											style={{
-												backgroundColor: 'rgba(255, 255, 255, 0.98)',
-												border: '1px solid var(--color-border)',
-												boxShadow: '0 4px 16px rgba(0,0,0,0.12)',
+												backgroundColor: isScrolled
+													? 'rgba(255, 255, 255, 0.85)'
+													: 'rgba(0, 0, 0, 0.35)',
+												borderBottom: isScrolled
+													? '1px solid rgba(125, 25, 53, 0.4)'
+													: '1px solid rgba(255, 255, 255, 0.2)',
 											}}
 										>
 											{link.children.map((child) => (
 												<Link
 													key={child.href}
 													href={child.href}
-													className='block px-4 py-2 text-[13px] font-medium uppercase tracking-[0.05em] transition-colors duration-300 hover:bg-[var(--color-bg-alt)]'
-													style={{ color: 'var(--color-text)' }}
+													className='block px-4 py-2.5 text-[13px] font-medium uppercase tracking-[0.05em] transition-colors duration-300'
+													style={{
+														color: isScrolled ? 'var(--color-text)' : 'rgba(255,255,255,0.95)',
+														textShadow: isScrolled ? 'none' : '0 1px 4px rgba(0,0,0,0.5)',
+													}}
 												>
 													{child.label}
 												</Link>
