@@ -328,28 +328,13 @@ This question was submitted from the Available Homesites page.
 
 	return (
 		<div className='space-y-6'>
-			<div className='flex items-center justify-between'>
-				<div>
-					<h2 className='font-serif text-3xl font-bold text-navy mb-2'>Available Homesites</h2>
-					<p className='text-muted-foreground'>{availableCount} of 30 homesites available</p>
-				</div>
-				<div className='flex items-center gap-4 flex-wrap'>
-					<div className='flex items-center gap-2'>
-						<div className='w-4 h-4 bg-green-500 rounded-full' />
-						<span className='text-sm'>Available</span>
-					</div>
-					<div className='flex items-center gap-2'>
-						<div className='w-4 h-4 bg-blue-500 rounded-full' />
-						<span className='text-sm'>Designer</span>
-					</div>
-					<div className='flex items-center gap-2'>
-						<div className='w-4 h-4 bg-red-500 rounded-full' />
-						<span className='text-sm'>Sold</span>
-					</div>
-				</div>
+			<div>
+				<h2 className='font-serif text-3xl font-bold text-navy mb-2'>Available Homesites</h2>
+				<p className='text-muted-foreground'>{availableCount} of 30 homesites available</p>
 			</div>
 
-			<div className='space-y-8'>
+			<div className='grid lg:grid-cols-[1fr_200px] gap-6 items-start'>
+				<div className='space-y-8 min-w-0'>
 				{/* Map 1 - Orchard 15A-15B (First Section) */}
 				<Card>
 					<CardHeader>
@@ -463,6 +448,35 @@ This question was submitted from the Available Homesites page.
 						</div>
 					</CardContent>
 				</Card>
+				</div>
+
+				{/* Legend - sticky sidebar */}
+				<aside className='lg:sticky lg:top-24'>
+					<div
+						className='rounded-md p-5'
+						style={{
+							backgroundColor: '#ffffff',
+							border: '1px solid var(--color-border)',
+							borderLeft: '4px solid #7d1935',
+						}}
+					>
+						<h3 className='font-serif text-base mb-4' style={{ color: 'var(--color-text)' }}>Legend</h3>
+						<div className='space-y-3'>
+							<div className='flex items-center gap-3'>
+								<div className='w-4 h-4 bg-green-500 rounded-full flex-shrink-0' />
+								<span className='text-sm font-light' style={{ color: 'var(--color-text)' }}>Available</span>
+							</div>
+							<div className='flex items-center gap-3'>
+								<div className='w-4 h-4 bg-blue-500 rounded-full flex-shrink-0' />
+								<span className='text-sm font-light' style={{ color: 'var(--color-text)' }}>Designer</span>
+							</div>
+							<div className='flex items-center gap-3'>
+								<div className='w-4 h-4 bg-red-500 rounded-full flex-shrink-0' />
+								<span className='text-sm font-light' style={{ color: 'var(--color-text)' }}>Sold</span>
+							</div>
+						</div>
+					</div>
+				</aside>
 			</div>
 
 			<Dialog
