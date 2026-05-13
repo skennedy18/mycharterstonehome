@@ -31,6 +31,7 @@ export function Navigation() {
 	const navLinks = [
 		{ href: '/', label: 'Home' },
 		{ href: '/about', label: 'About Us' },
+		{ href: '/life-in-pecan', label: 'Life in Pecan' },
 		{ href: '/models', label: 'Floor Plans' },
 		{ href: '/available-plots', label: 'Available Homesites' },
 		{ href: '/gallery', label: 'Gallery' },

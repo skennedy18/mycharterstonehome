@@ -1,4 +1,6 @@
+import { ArrowRight } from "lucide-react"
 import Image from "next/image"
+import Link from "next/link"
 
 interface Lifestyle {
   title: string
@@ -84,6 +86,16 @@ export function LifestyleShowcase() {
               </div>
             </div>
           ))}
+        </div>
+
+        <div className="text-center mt-12">
+          <Link
+            href="/life-in-pecan"
+            className="inline-flex items-center gap-2 btn-primary group"
+          >
+            Explore More
+            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+          </Link>
         </div>
       </div>
     </section>
