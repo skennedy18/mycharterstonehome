@@ -2,11 +2,17 @@
 
 import { FloorPlanViewer } from '@/components/floor-plan-viewer';
 import { Footer } from '@/components/footer';
+import { InteriorGallery } from '@/components/interior-gallery';
 import { ModelFilters } from '@/components/model-filters';
 import { MortgageCalculator } from '@/components/mortgage-calculator';
 import { Navigation } from '@/components/navigation';
-import { Download, Eye } from 'lucide-react';
+import { Download, Eye, ImageIcon } from 'lucide-react';
 import { useState } from 'react';
+
+interface InteriorImage {
+	url: string;
+	caption: string;
+}
 
 interface Model {
 	id: number;
@@ -22,6 +28,7 @@ interface Model {
 	available: boolean;
 	floorPlans: Array<{ name: string; image: string; type: string }>;
 	elevations: string[];
+	interiorImages: InteriorImage[];
 }
 
 const allModels: Model[] = [
@@ -38,7 +45,8 @@ const allModels: Model[] = [
 		lotType: 'golf',
 		available: true,
 		floorPlans: [{ name: 'Main Floor Plan', image: '/floor-plans/cardinal-plan.png', type: 'Main Level' }],
-		elevations: ['https://hebbkx1anhila5yf.public.blob.vercel-storage.com/2180%20Middlewood%20Cir_Cardinal.png-6jlcNpFIPksnSKEB9HTFz9J3EJXKNE.jpeg']
+		elevations: ['https://hebbkx1anhila5yf.public.blob.vercel-storage.com/2180%20Middlewood%20Cir_Cardinal.png-6jlcNpFIPksnSKEB9HTFz9J3EJXKNE.jpeg'],
+		interiorImages: []
 	},
 	{
 		id: 2,
@@ -53,7 +61,8 @@ const allModels: Model[] = [
 		lotType: 'golf',
 		available: true,
 		floorPlans: [{ name: 'Main Floor Plan', image: '/floor-plans/magpie-plan.png', type: 'Main Level' }],
-		elevations: ['https://hebbkx1anhila5yf.public.blob.vercel-storage.com/2188%20Middlewood%20Cir_Magpie.png-zx0jiaz0NEJV7JnQ2TZ3peNKjASDP3.jpeg']
+		elevations: ['https://hebbkx1anhila5yf.public.blob.vercel-storage.com/2188%20Middlewood%20Cir_Magpie.png-zx0jiaz0NEJV7JnQ2TZ3peNKjASDP3.jpeg'],
+		interiorImages: []
 	},
 	{
 		id: 3,
@@ -68,7 +77,8 @@ const allModels: Model[] = [
 		lotType: 'golf',
 		available: true,
 		floorPlans: [{ name: 'Main Floor Plan', image: '/floor-plans/martin-plan.png', type: 'Main Level' }],
-		elevations: ['https://hebbkx1anhila5yf.public.blob.vercel-storage.com/2184%20Middlewood%20Cir_Martin.png-1yw8K0L1IGkkbrPbYJnRv3jL6kuTrv.jpeg']
+		elevations: ['https://hebbkx1anhila5yf.public.blob.vercel-storage.com/2184%20Middlewood%20Cir_Martin.png-1yw8K0L1IGkkbrPbYJnRv3jL6kuTrv.jpeg'],
+		interiorImages: []
 	},
 	{
 		id: 4,
@@ -83,7 +93,8 @@ const allModels: Model[] = [
 		lotType: 'golf',
 		available: true,
 		floorPlans: [{ name: 'Main Floor Plan', image: '/floor-plans/martin-plan.png', type: 'Main Level' }],
-		elevations: ['https://hebbkx1anhila5yf.public.blob.vercel-storage.com/2184%20Middlewood%20Cir_Martin.png-1yw8K0L1IGkkbrPbYJnRv3jL6kuTrv.jpeg']
+		elevations: ['https://hebbkx1anhila5yf.public.blob.vercel-storage.com/2184%20Middlewood%20Cir_Martin.png-1yw8K0L1IGkkbrPbYJnRv3jL6kuTrv.jpeg'],
+		interiorImages: []
 	}
 ];
 
@@ -94,6 +105,7 @@ export default function ModelsPage() {
 	const [lotType, setLotType] = useState('any');
 	const [selectedModel, setSelectedModel] = useState<Model | null>(null);
 	const [viewerOpen, setViewerOpen] = useState(false);
+	const [expandedModel, setExpandedModel] = useState<number | null>(null);
 
 	const resetFilters = () => {
 		setPriceRange([600000, 800000]);
@@ -213,6 +225,15 @@ export default function ModelsPage() {
 																<Eye className='h-4 w-4' />
 																View Floor Plans
 															</button>
+															<button
+																className='btn-secondary flex items-center justify-center gap-2 text-[13px]'
+																onClick={() => setExpandedModel(expandedModel === model.id ? null : model.id)}
+																data-sttrack='View Interiors'
+																data-stfloorplan={model.name}
+															>
+																<ImageIcon className='h-4 w-4' />
+																Interiors
+															</button>
 														</div>
 														<button
 															className='text-[13px] tracking-[0.05em] uppercase underline underline-offset-4 text-left transition-colors duration-300 flex items-center gap-2 py-2'
@@ -227,6 +248,21 @@ export default function ModelsPage() {
 													</div>
 												</div>
 											</div>
+											{expandedModel === model.id && (
+												<div className='p-6' style={{ borderTop: '1px solid var(--color-border)', backgroundColor: 'var(--color-bg-alt)' }}>
+													<h3 className='font-serif mb-4' style={{ color: 'var(--color-text)' }}>Interior Renderings</h3>
+													{model.interiorImages.length > 0 ? (
+														<InteriorGallery
+															images={model.interiorImages}
+															modelName={model.name}
+														/>
+													) : (
+														<p className='text-sm font-light' style={{ color: 'var(--color-text-muted)' }}>
+															Interior photos coming soon.
+														</p>
+													)}
+												</div>
+											)}
 										</div>
 									))}
 								</div>
