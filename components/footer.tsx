@@ -33,8 +33,8 @@ export function Footer() {
 						</h3>
 						<ul className='space-y-2'>
 							{[
-								{ href: '/models', label: 'Floor Plans' },
-								{ href: '/available-plots', label: 'Available Homesites' },
+								{ href: '/models', label: 'Available Homes' },
+								{ href: '/available-plots', label: 'See Available Homesites' },
 								{ href: '/gallery', label: 'Gallery' },
 								{ href: '/about', label: 'About Us' },
 								{ href: '/contact', label: 'Contact' },
@@ -70,12 +70,12 @@ export function Footer() {
 							<li className='flex items-center gap-2 text-sm' style={{ color: 'rgba(255,255,255,0.7)' }}>
 								<Phone className='h-4 w-4 flex-shrink-0' />
 								<a
-									href='tel:+18477575571'
-									data-stlabel='Footer - (847) 757-5571'
+									href='tel:+16824983197'
+									data-stlabel='Footer - (682) 498-3197'
 									className='transition-opacity duration-300 opacity-70 hover:opacity-100'
 									style={{ color: 'rgba(255,255,255,0.9)' }}
 								>
-									(847) 757-5571
+									(682) 498-3197
 								</a>
 							</li>
 							<li className='flex items-center gap-2 text-sm' style={{ color: 'rgba(255,255,255,0.7)' }}>

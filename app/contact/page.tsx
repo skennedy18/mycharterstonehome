@@ -4,7 +4,7 @@ import type React from 'react';
 
 import { Footer } from '@/components/footer';
 import { Navigation } from '@/components/navigation';
-import { Clock, MapPin, Phone } from 'lucide-react';
+import { Calendar, Clock, MapPin, Phone } from 'lucide-react';
 import { useState } from 'react';
 
 export default function ContactPage() {
@@ -126,12 +126,12 @@ export default function ContactPage() {
 											<div>
 												<p className='text-sm font-normal' style={{ color: 'var(--color-text)' }}>Call Us</p>
 												<a
-													href='tel:+18477575571'
-													data-stlabel='Call Us - (847) 757-5571'
+													href='tel:+16824983197'
+													data-stlabel='Call Us - (682) 498-3197'
 													className='text-sm font-light transition-colors duration-300'
 													style={{ color: 'var(--color-text-muted)' }}
 												>
-													(847) 757-5571
+													(682) 498-3197
 												</a>
 											</div>
 										</div>
@@ -168,6 +168,36 @@ export default function ContactPage() {
 
 							{/* Contact Form */}
 							<div className='lg:col-span-2'>
+								{/* Book an Appointment */}
+								<div
+									className='mb-10 p-6 rounded-md flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4'
+									style={{
+										background: 'linear-gradient(135deg, #ffffff 0%, var(--color-bg-alt) 100%)',
+										border: '1px solid var(--color-border)',
+										borderLeft: '4px solid #7d1935',
+									}}
+								>
+									<div className='flex items-start gap-4'>
+										<Calendar className='h-6 w-6 flex-shrink-0 mt-1' style={{ color: 'var(--color-primary)' }} />
+										<div>
+											<h3 className='font-serif mb-1' style={{ color: 'var(--color-text)' }}>Book an Appointment with Us</h3>
+											<p className='text-sm font-light' style={{ color: 'var(--color-text-muted)' }}>
+												Schedule a time that works for you — we&rsquo;ll meet you at the property.
+											</p>
+										</div>
+									</div>
+									<a
+										href='https://calendar.app.google/jcBsvMokPawnGxgF8'
+										target='_blank'
+										rel='noopener noreferrer'
+										data-stlabel='Book an Appointment'
+										className='btn-primary inline-flex items-center justify-center gap-2 flex-shrink-0'
+									>
+										<Calendar className='h-4 w-4' />
+										Book Now
+									</a>
+								</div>
+
 								<h3 className='font-serif mb-8' style={{ color: 'var(--color-text)' }}>Send Us a Message</h3>
 								{isSubmitted ? (
 									<div className='py-12'>

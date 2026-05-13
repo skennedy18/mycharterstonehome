@@ -48,8 +48,8 @@ export default function AvailablePlotsPage() {
 								Contact Us
 							</Link>
 							<a
-								href='tel:+18477575571'
-								data-stlabel='Call Now - (847) 757-5571'
+								href='tel:+16824983197'
+								data-stlabel='Call Now - (682) 498-3197'
 								className='btn-secondary-light flex items-center justify-center gap-2'
 							>
 								<Phone className='h-4 w-4' />
