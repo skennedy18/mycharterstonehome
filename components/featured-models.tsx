@@ -8,7 +8,6 @@ interface Model {
   baths: number
   sqft: string
   garage: number
-  price: string
   available: boolean
 }
 
@@ -22,7 +21,6 @@ const models: Model[] = [
     baths: 3,
     sqft: "2,910",
     garage: 3,
-    price: "$651,840",
     available: true,
   },
   {
@@ -34,7 +32,6 @@ const models: Model[] = [
     baths: 3,
     sqft: "3,003",
     garage: 3,
-    price: "$672,672",
     available: true,
   },
   {
@@ -46,7 +43,6 @@ const models: Model[] = [
     baths: 3,
     sqft: "3,000",
     garage: 3,
-    price: "$672,000",
     available: true,
   },
 ]
@@ -103,19 +99,21 @@ export function FeaturedModels() {
                 <p className="text-[13px] font-light mb-2" style={{ color: "var(--color-text-muted)" }}>
                   {model.address}
                 </p>
-                <p className="text-base font-normal mb-3" style={{ color: "#7d1935" }}>
-                  Starting at {model.price}
-                </p>
-                <p className="text-[13px] font-light mb-4" style={{ color: "var(--color-text-muted)" }}>
+                <p className="text-[13px] font-light mb-5" style={{ color: "var(--color-text-muted)" }}>
                   {model.beds} Bed · {model.baths} Bath · {model.sqft} Sq Ft · {model.garage} Car
                 </p>
-                <Link
-                  href="/models"
-                  className="text-[13px] tracking-[0.05em] uppercase underline underline-offset-4 transition-colors duration-300"
-                  style={{ color: "#7d1935" }}
-                >
-                  View Details
-                </Link>
+                <div className="flex flex-wrap items-center gap-4">
+                  <Link href="/contact" className="btn-primary text-[13px]">
+                    Contact Us for Details
+                  </Link>
+                  <Link
+                    href="/models"
+                    className="text-[13px] tracking-[0.05em] uppercase underline underline-offset-4 transition-colors duration-300"
+                    style={{ color: "#7d1935" }}
+                  >
+                    View Details
+                  </Link>
+                </div>
               </div>
             </div>
           ))}
