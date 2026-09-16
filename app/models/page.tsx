@@ -4,9 +4,9 @@ import { FloorPlanViewer } from '@/components/floor-plan-viewer';
 import { Footer } from '@/components/footer';
 import { InteriorGallery } from '@/components/interior-gallery';
 import { ModelFilters } from '@/components/model-filters';
-import { MortgageCalculator } from '@/components/mortgage-calculator';
 import { Navigation } from '@/components/navigation';
 import { Download, Eye, ImageIcon } from 'lucide-react';
+import Link from 'next/link';
 import { useState } from 'react';
 
 interface InteriorImage {
@@ -23,7 +23,6 @@ interface Model {
 	baths: number;
 	sqft: number;
 	garage: number;
-	price: number;
 	lotType: string;
 	available: boolean;
 	floorPlans: Array<{ name: string; image: string; type: string }>;
@@ -41,7 +40,6 @@ const allModels: Model[] = [
 		baths: 3,
 		sqft: 2910,
 		garage: 3,
-		price: 651840,
 		lotType: 'golf',
 		available: true,
 		floorPlans: [{ name: 'Main Floor Plan', image: '/floor-plans/cardinal-plan.png', type: 'Main Level' }],
@@ -57,7 +55,6 @@ const allModels: Model[] = [
 		baths: 3,
 		sqft: 3003,
 		garage: 3,
-		price: 672672,
 		lotType: 'golf',
 		available: true,
 		floorPlans: [{ name: 'Main Floor Plan', image: '/floor-plans/magpie-plan.png', type: 'Main Level' }],
@@ -73,7 +70,6 @@ const allModels: Model[] = [
 		baths: 3,
 		sqft: 3000,
 		garage: 3,
-		price: 672000,
 		lotType: 'golf',
 		available: true,
 		floorPlans: [{ name: 'Main Floor Plan', image: '/floor-plans/martin-plan.png', type: 'Main Level' }],
@@ -89,7 +85,6 @@ const allModels: Model[] = [
 		baths: 3,
 		sqft: 3000,
 		garage: 3,
-		price: 672000,
 		lotType: 'golf',
 		available: true,
 		floorPlans: [{ name: 'Main Floor Plan', image: '/floor-plans/martin-plan.png', type: 'Main Level' }],
@@ -99,7 +94,6 @@ const allModels: Model[] = [
 ];
 
 export default function ModelsPage() {
-	const [priceRange, setPriceRange] = useState([600000, 800000]);
 	const [sqftRange, setSqftRange] = useState([2000, 4000]);
 	const [bedrooms, setBedrooms] = useState('any');
 	const [lotType, setLotType] = useState('any');
@@ -108,18 +102,16 @@ export default function ModelsPage() {
 	const [expandedModel, setExpandedModel] = useState<number | null>(null);
 
 	const resetFilters = () => {
-		setPriceRange([600000, 800000]);
 		setSqftRange([2000, 4000]);
 		setBedrooms('any');
 		setLotType('any');
 	};
 
 	const filteredModels = allModels.filter((model) => {
-		const matchesPrice = model.price >= priceRange[0] && model.price <= priceRange[1];
 		const matchesSqft = model.sqft >= sqftRange[0] && model.sqft <= sqftRange[1];
 		const matchesBedrooms = bedrooms === 'any' || model.beds >= Number.parseInt(bedrooms);
 		const matchesLotType = lotType === 'any' || model.lotType === lotType;
-		return matchesPrice && matchesSqft && matchesBedrooms && matchesLotType;
+		return matchesSqft && matchesBedrooms && matchesLotType;
 	});
 
 	const handleViewFloorPlans = (model: Model) => {
@@ -159,8 +151,6 @@ export default function ModelsPage() {
 						<div className='grid lg:grid-cols-4 gap-8'>
 							<div className='lg:col-span-1 space-y-6'>
 								<ModelFilters
-									priceRange={priceRange}
-									setPriceRange={setPriceRange}
 									sqftRange={sqftRange}
 									setSqftRange={setSqftRange}
 									bedrooms={bedrooms}
@@ -169,7 +159,6 @@ export default function ModelsPage() {
 									setLotType={setLotType}
 									onReset={resetFilters}
 								/>
-								<MortgageCalculator />
 							</div>
 
 							<div className='lg:col-span-3'>
@@ -207,17 +196,22 @@ export default function ModelsPage() {
 													<h3 className='font-serif text-2xl mb-1' style={{ color: 'var(--color-text)' }}>
 														{model.address}
 													</h3>
-													<p className='text-sm font-light mb-1' style={{ color: 'var(--color-text-muted)' }}>{model.name}</p>
-													<p className='text-base mb-3' style={{ color: 'var(--color-text)' }}>
-														Starting at ${model.price.toLocaleString()}
-													</p>
+													<p className='text-sm font-light mb-3' style={{ color: 'var(--color-text-muted)' }}>{model.name}</p>
 													<p className='text-[13px] font-light mb-6' style={{ color: 'var(--color-text-muted)' }}>
 														{model.beds} Bed · {model.baths} Bath · {model.sqft.toLocaleString()} Sq Ft · {model.garage} Car
 													</p>
 													<div className='flex flex-col gap-2'>
+														<Link
+															href='/contact'
+															className='btn-primary flex items-center justify-center text-[13px]'
+															data-sttrack='Contact Us for Details'
+															data-stfloorplan={model.name}
+														>
+															Contact Us for Details
+														</Link>
 														<div className='flex gap-2'>
 															<button
-																className='btn-primary flex-1 flex items-center justify-center gap-2 text-[13px]'
+																className='btn-secondary flex-1 flex items-center justify-center gap-2 text-[13px]'
 																onClick={() => handleViewFloorPlans(model)}
 																data-sttrack='View Floor Plans'
 																data-stfloorplan={model.name}

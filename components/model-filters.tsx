@@ -5,8 +5,6 @@ import { Slider } from "@/components/ui/slider"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 
 interface ModelFiltersProps {
-  priceRange: number[]
-  setPriceRange: (range: number[]) => void
   sqftRange: number[]
   setSqftRange: (range: number[]) => void
   bedrooms: string
@@ -17,8 +15,6 @@ interface ModelFiltersProps {
 }
 
 export function ModelFilters({
-  priceRange,
-  setPriceRange,
   sqftRange,
   setSqftRange,
   bedrooms,
@@ -43,20 +39,6 @@ export function ModelFilters({
         >
           Reset
         </button>
-      </div>
-
-      <div className="space-y-3">
-        <Label className="text-[12px] uppercase tracking-[0.05em]" style={{ color: "var(--color-text-muted)" }}>
-          Price: ${priceRange[0].toLocaleString()} – ${priceRange[1].toLocaleString()}
-        </Label>
-        <Slider
-          min={600000}
-          max={1000000}
-          step={25000}
-          value={priceRange}
-          onValueChange={setPriceRange}
-          className="w-full"
-        />
       </div>
 
       <div className="space-y-3">
