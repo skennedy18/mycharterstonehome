@@ -81,12 +81,12 @@ export function Footer() {
 							<li className='flex items-center gap-2 text-sm' style={{ color: 'rgba(255,255,255,0.7)' }}>
 								<Mail className='h-4 w-4 flex-shrink-0' />
 								<a
-									href='mailto:info@mycharterstonehome.com'
+									href='mailto:courtney@mycharterstonehome.com'
 									className='transition-opacity duration-300 opacity-70 hover:opacity-100'
-									data-stlabel='Footer - info@mycharterstonehome.com'
+									data-stlabel='Footer - courtney@mycharterstonehome.com'
 									style={{ color: 'rgba(255,255,255,0.9)' }}
 								>
-									info@mycharterstonehome.com
+									courtney@mycharterstonehome.com
 								</a>
 							</li>
 						</ul>
