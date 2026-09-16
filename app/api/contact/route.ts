@@ -26,7 +26,7 @@ export async function POST(request: Request) {
 
     const { data, error } = await resend.emails.send({
       from: 'Charterstone Contact <contact@mycharterstonehome.com>',
-      to: ['info@mycharterstonehome.com'],
+      to: ['courtney@mycharterstonehome.com'],
       replyTo: email,
       subject: `${isRealtor ? '[Realtor Inquiry] ' : ''}New Contact Form Submission from ${firstName} ${lastName}`,
       html: `
@@ -49,6 +49,8 @@ export async function POST(request: Request) {
     })
 
     if (error) {
+      // Surfaces the Resend reason (unverified domain, bad API key, …) in Vercel's function logs
+      console.error('Resend error:', error)
       return NextResponse.json({ error: 'Failed to send email' }, { status: 500 })
     }
 
